@@ -1,0 +1,13 @@
+{
+  "name": "wwb-theme",
+  "version": "1.0.0",
+  "description": "Thème WordPress WWB - Wiwilbild",
+  "scripts": {
+    "build": "sass style/app.scss:style/app.css --style=compressed --no-source-map",
+    "watch": "sass style/app.scss:style/app.css --watch --style=expanded",
+    "dev": "sass style/app.scss:style/app.css --watch"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0"
+  }
+}

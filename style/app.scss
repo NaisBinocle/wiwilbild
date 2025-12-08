@@ -1,0 +1,38 @@
+@import "config.scss";
+@import "grillade.scss";
+
+// Sass config file
+// -----------------
+
+// (WARNING : you should comment this line and move config file from vendor/knacss folder to your own folder)
+@import "_00-config";
+
+// normalize include
+@import "knacss/_01a-normalize"; // normalize
+
+// Sass base styles
+@import "knacss/_01b-base"; // reset and basic styles
+
+// Sass files : chose the ones you need
+@import "knacss/_02-layout"; // alignment, modules, positionning
+@import "knacss/_03-grids"; // grids
+//@import "knacss/_04-tables"; // data tables consistency
+//@import "knacss/_05-forms"; // forms consistency
+@import "knacss/_06-helpers"; // width and spacers visually classes
+@import "knacss/_07-responsive"; // Responsive Web Design helpers
+//@import "knacss/_08-print"; // print quick reset
+//@import "knacss/_09-misc"; // skip links, google maps and hyphens
+@import "knacss/_10-styling"; // minor stylings
+@import "knacss/_11-wordpress"; // WordPress reset and basic styles
+@import "knacss/_owl.carousel";
+// WordPress base styles  
+/* ----------------------------- */
+/* ==own stylesheet              */
+/* ----------------------------- */
+
+//@import "style";
+@import "style";
+/* Here should go your own CSS styles */
+/* You can also link them with a Sass @import */
+/* @import "my-styles"; */
+

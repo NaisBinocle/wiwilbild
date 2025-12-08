@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+*.map
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Compiled CSS (keep app.css, ignore intermediate files)
+style/*.css
+!style/app.css
+
+# Environment
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Import script (contains security key)
+import-test-data.php
