@@ -5,7 +5,16 @@
       "Bash(npm install:*)",
       "Bash(npm run build:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit - Thème Wiwilbild\n\n- Thème WordPress/WooCommerce pour boutique de matériaux de rénovation\n- Support FSE (Full Site Editing) hybride\n- Templates : page d''accueil, blog, article\n- Fonctionnalités :\n  - Calculateur de surface pour carrelage\n  - Swatches couleurs/dimensions pour variations\n  - Hotspots interactifs sur images (médiathèque)\n  - Prix au m² pour catégorie carrelage\n- Intégration WooCommerce complète\n- Styles SCSS avec KNACSS\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(gh auth status:*)",
+      "Bash(where git:*)",
+      "Bash(gh auth login:*)",
+      "Bash(gh repo create:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd CLAUDE.md - documentation complète du thème\n\nRécapitulatif de toutes les fonctionnalités :\n- Swatches couleurs, calculateur surface, prix /m²\n- Système hotspots interactifs (médiathèque)\n- Configuration FSE (templates, parts, patterns)\n- Hooks et filtres personnalisés\n- Structure des fichiers\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
