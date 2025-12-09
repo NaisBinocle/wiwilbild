@@ -1,115 +1,151 @@
-<!-- wp:group {"className":"site-footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|40"}}},"backgroundColor":"secondary","textColor":"background","layout":{"type":"constrained"}} -->
-<footer class="wp-block-group site-footer has-background-color has-secondary-background-color has-text-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--40)">
+<!-- wp:group {"className":"container grid-12 liens","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|40"}}},"backgroundColor":"background","layout":{"type":"constrained"}} -->
+<div class="wp-block-group container grid-12 liens has-background-background-color has-background" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--40)">
 
-	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|50","left":"var:preset|spacing|50"}}}} -->
+	<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|40"}}}} -->
 	<div class="wp-block-columns">
 
-		<!-- wp:column {"width":"30%"} -->
-		<div class="wp-block-column" style="flex-basis:30%">
-
-			<!-- wp:site-logo {"width":180,"className":"footer-logo"} /-->
-
-			<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|30"}},"typography":{"fontSize":"0.9rem"}},"textColor":"background"} -->
-			<p class="has-background-color has-text-color" style="margin-top:var(--wp--preset--spacing--30);font-size:0.9rem">Wiwilbild, votre partenaire pour tous vos projets de rénovation. Matériaux de qualité au meilleur prix.</p>
-			<!-- /wp:paragraph -->
-
-			<!-- wp:social-links {"iconColor":"background","iconColorValue":"#FFFFFF","style":{"spacing":{"margin":{"top":"var:preset|spacing|30"},"blockGap":{"top":"var:preset|spacing|10","left":"var:preset|spacing|10"}}},"className":"is-style-logos-only"} -->
-			<ul class="wp-block-social-links has-icon-color is-style-logos-only" style="margin-top:var(--wp--preset--spacing--30)">
-				<!-- wp:social-link {"url":"https://facebook.com","service":"facebook"} /-->
-				<!-- wp:social-link {"url":"https://instagram.com","service":"instagram"} /-->
-				<!-- wp:social-link {"url":"https://pinterest.com","service":"pinterest"} /-->
-			</ul>
-			<!-- /wp:social-links -->
-
+		<!-- wp:column {"width":"16.66%","className":"col-2 footer_logo"} -->
+		<div class="wp-block-column col-2 footer_logo" style="flex-basis:16.66%">
+			<!-- wp:site-logo {"width":150,"shouldSyncIcon":false} /-->
 		</div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"width":"20%"} -->
-		<div class="wp-block-column" style="flex-basis:20%">
+		<!-- wp:column {"width":"58.33%","className":"col-7 footer_catalogue"} -->
+		<div class="wp-block-column col-7 footer_catalogue" style="flex-basis:58.33%">
+			<!-- wp:columns -->
+			<div class="wp-block-columns">
 
-			<!-- wp:heading {"level":4,"style":{"typography":{"fontStyle":"normal","fontWeight":"600","fontSize":"1rem"}},"textColor":"primary"} -->
-			<h4 class="wp-block-heading has-primary-color has-text-color" style="font-size:1rem;font-style:normal;font-weight:600">Nos produits</h4>
-			<!-- /wp:heading -->
+				<!-- wp:column {"className":"categorie"} -->
+				<div class="wp-block-column categorie">
+					<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600","fontSize":"1rem"}},"textColor":"foreground"} -->
+					<h3 class="wp-block-heading has-foreground-color has-text-color" style="font-size:1rem;font-style:normal;font-weight:600">Carrelage</h3>
+					<!-- /wp:heading -->
+					<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"foreground-alt"} -->
+					<p class="has-foreground-alt-color has-text-color" style="font-size:0.9rem"><a href="/categorie-produit/carrelage/">Tous les carrelages</a></p>
+					<!-- /wp:paragraph -->
+					<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"foreground-alt"} -->
+					<p class="has-foreground-alt-color has-text-color" style="font-size:0.9rem"><a href="/categorie-produit/carrelage/carrelage-interieur/">Carrelage intérieur</a></p>
+					<!-- /wp:paragraph -->
+					<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"foreground-alt"} -->
+					<p class="has-foreground-alt-color has-text-color" style="font-size:0.9rem"><a href="/categorie-produit/carrelage/carrelage-exterieur/">Carrelage extérieur</a></p>
+					<!-- /wp:paragraph -->
+				</div>
+				<!-- /wp:column -->
 
-			<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical"},"style":{"typography":{"fontSize":"0.9rem"},"spacing":{"blockGap":"var:preset|spacing|10"}},"textColor":"background"} -->
-				<!-- wp:navigation-link {"label":"Carrelage","url":"/categorie-produit/carrelage/"} /-->
-				<!-- wp:navigation-link {"label":"Parquet","url":"/categorie-produit/parquet/"} /-->
-				<!-- wp:navigation-link {"label":"Faïence","url":"/categorie-produit/faience/"} /-->
-				<!-- wp:navigation-link {"label":"Accessoires","url":"/categorie-produit/accessoires/"} /-->
-			<!-- /wp:navigation -->
+				<!-- wp:column {"className":"categorie"} -->
+				<div class="wp-block-column categorie">
+					<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600","fontSize":"1rem"}},"textColor":"foreground"} -->
+					<h3 class="wp-block-heading has-foreground-color has-text-color" style="font-size:1rem;font-style:normal;font-weight:600">Parquet</h3>
+					<!-- /wp:heading -->
+					<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"foreground-alt"} -->
+					<p class="has-foreground-alt-color has-text-color" style="font-size:0.9rem"><a href="/categorie-produit/parquet/">Tous les parquets</a></p>
+					<!-- /wp:paragraph -->
+					<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"foreground-alt"} -->
+					<p class="has-foreground-alt-color has-text-color" style="font-size:0.9rem"><a href="/categorie-produit/parquet/parquet-stratifie/">Parquet stratifié</a></p>
+					<!-- /wp:paragraph -->
+					<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"foreground-alt"} -->
+					<p class="has-foreground-alt-color has-text-color" style="font-size:0.9rem"><a href="/categorie-produit/parquet/parquet-massif/">Parquet massif</a></p>
+					<!-- /wp:paragraph -->
+				</div>
+				<!-- /wp:column -->
 
+				<!-- wp:column {"className":"categorie"} -->
+				<div class="wp-block-column categorie">
+					<!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600","fontSize":"1rem"}},"textColor":"foreground"} -->
+					<h3 class="wp-block-heading has-foreground-color has-text-color" style="font-size:1rem;font-style:normal;font-weight:600">Faïence</h3>
+					<!-- /wp:heading -->
+					<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"foreground-alt"} -->
+					<p class="has-foreground-alt-color has-text-color" style="font-size:0.9rem"><a href="/categorie-produit/faience/">Toutes les faïences</a></p>
+					<!-- /wp:paragraph -->
+					<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"foreground-alt"} -->
+					<p class="has-foreground-alt-color has-text-color" style="font-size:0.9rem"><a href="/categorie-produit/faience/faience-murale/">Faïence murale</a></p>
+					<!-- /wp:paragraph -->
+					<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"foreground-alt"} -->
+					<p class="has-foreground-alt-color has-text-color" style="font-size:0.9rem"><a href="/categorie-produit/faience/mosaique/">Mosaïque</a></p>
+					<!-- /wp:paragraph -->
+				</div>
+				<!-- /wp:column -->
+
+			</div>
+			<!-- /wp:columns -->
 		</div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"width":"20%"} -->
-		<div class="wp-block-column" style="flex-basis:20%">
-
-			<!-- wp:heading {"level":4,"style":{"typography":{"fontStyle":"normal","fontWeight":"600","fontSize":"1rem"}},"textColor":"primary"} -->
-			<h4 class="wp-block-heading has-primary-color has-text-color" style="font-size:1rem;font-style:normal;font-weight:600">Informations</h4>
-			<!-- /wp:heading -->
-
-			<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical"},"style":{"typography":{"fontSize":"0.9rem"},"spacing":{"blockGap":"var:preset|spacing|10"}},"textColor":"background"} -->
-				<!-- wp:navigation-link {"label":"À propos","url":"/a-propos/"} /-->
-				<!-- wp:navigation-link {"label":"Livraison","url":"/livraison/"} /-->
-				<!-- wp:navigation-link {"label":"CGV","url":"/cgv/"} /-->
-				<!-- wp:navigation-link {"label":"Mentions légales","url":"/mentions-legales/"} /-->
-			<!-- /wp:navigation -->
-
-		</div>
+		<!-- wp:column {"width":"8.33%","className":"grid-offset col-1"} -->
+		<div class="wp-block-column grid-offset col-1" style="flex-basis:8.33%"></div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"width":"30%"} -->
-		<div class="wp-block-column" style="flex-basis:30%">
-
-			<!-- wp:heading {"level":4,"style":{"typography":{"fontStyle":"normal","fontWeight":"600","fontSize":"1rem"}},"textColor":"primary"} -->
-			<h4 class="wp-block-heading has-primary-color has-text-color" style="font-size:1rem;font-style:normal;font-weight:600">Contact</h4>
-			<!-- /wp:heading -->
-
-			<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.9rem"}},"textColor":"background"} -->
-			<p class="has-background-color has-text-color" style="font-size:0.9rem">📍 Adresse de la boutique<br>📞 01 23 45 67 89<br>✉️ contact@wiwilbild.fr</p>
-			<!-- /wp:paragraph -->
-
-			<!-- wp:heading {"level":4,"style":{"typography":{"fontStyle":"normal","fontWeight":"600","fontSize":"1rem"},"spacing":{"margin":{"top":"var:preset|spacing|30"}}},"textColor":"primary"} -->
-			<h4 class="wp-block-heading has-primary-color has-text-color" style="margin-top:var(--wp--preset--spacing--30);font-size:1rem;font-style:normal;font-weight:600">Newsletter</h4>
-			<!-- /wp:heading -->
-
-			<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.85rem"}},"textColor":"background"} -->
-			<p class="has-background-color has-text-color" style="font-size:0.85rem">Inscrivez-vous pour recevoir nos offres</p>
-			<!-- /wp:paragraph -->
-
+		<!-- wp:column {"width":"16.66%","className":"col-2 socials_footer"} -->
+		<div class="wp-block-column col-2 socials_footer" style="flex-basis:16.66%">
+			<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"flex-end"},"style":{"spacing":{"blockGap":"var:preset|spacing|20"}}} -->
+			<div class="wp-block-group">
+				<!-- wp:image {"width":"30px","sizeSlug":"full","linkDestination":"custom"} -->
+				<figure class="wp-block-image size-full is-resized" style="width:30px"><a href="https://instagram.com/"><img src="/wp-content/themes/WWB/img/instagram.png" alt="Instagram"/></a></figure>
+				<!-- /wp:image -->
+				<!-- wp:image {"width":"30px","sizeSlug":"full","linkDestination":"custom"} -->
+				<figure class="wp-block-image size-full is-resized" style="width:30px"><a href="https://youtube.com/"><img src="/wp-content/themes/WWB/img/youtube.png" alt="YouTube"/></a></figure>
+				<!-- /wp:image -->
+				<!-- wp:image {"width":"30px","sizeSlug":"full","linkDestination":"custom"} -->
+				<figure class="wp-block-image size-full is-resized" style="width:30px"><a href="https://linkedin.com/"><img src="/wp-content/themes/WWB/img/linkedin.png" alt="LinkedIn"/></a></figure>
+				<!-- /wp:image -->
+			</div>
+			<!-- /wp:group -->
 		</div>
 		<!-- /wp:column -->
 
 	</div>
 	<!-- /wp:columns -->
 
-	<!-- wp:separator {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|30"}}},"backgroundColor":"foreground-alt","className":"is-style-wide"} -->
-	<hr class="wp-block-separator has-text-color has-foreground-alt-color has-alpha-channel-opacity has-foreground-alt-background-color has-background is-style-wide" style="margin-top:var(--wp--preset--spacing--50);margin-bottom:var(--wp--preset--spacing--30)"/>
-	<!-- /wp:separator -->
+</div>
+<!-- /wp:group -->
 
-	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<!-- wp:group {"className":"container payments","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}},"backgroundColor":"background","layout":{"type":"constrained"}} -->
+<div class="wp-block-group container payments has-background-background-color has-background" style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)">
+	<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|20"}}} -->
 	<div class="wp-block-group">
-
-		<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.8rem"}},"textColor":"foreground-alt"} -->
-		<p class="has-foreground-alt-color has-text-color" style="font-size:0.8rem">© 2024 Wiwilbild. Tous droits réservés.</p>
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.85rem"}},"textColor":"foreground-alt"} -->
+		<p class="has-foreground-alt-color has-text-color" style="font-size:0.85rem">Paiement sécurisé : Visa, Mastercard, PayPal</p>
 		<!-- /wp:paragraph -->
-
-		<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"},"style":{"spacing":{"blockGap":"var:preset|spacing|20"}}} -->
-		<div class="wp-block-group">
-			<!-- wp:image {"width":"40px","sizeSlug":"full","className":"payment-icon"} -->
-			<figure class="wp-block-image size-full is-resized payment-icon"><img src="" alt="Visa" style="width:40px"/></figure>
-			<!-- /wp:image -->
-			<!-- wp:image {"width":"40px","sizeSlug":"full","className":"payment-icon"} -->
-			<figure class="wp-block-image size-full is-resized payment-icon"><img src="" alt="Mastercard" style="width:40px"/></figure>
-			<!-- /wp:image -->
-			<!-- wp:image {"width":"40px","sizeSlug":"full","className":"payment-icon"} -->
-			<figure class="wp-block-image size-full is-resized payment-icon"><img src="" alt="PayPal" style="width:40px"/></figure>
-			<!-- /wp:image -->
-		</div>
-		<!-- /wp:group -->
-
 	</div>
 	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
 
-</footer>
+<!-- wp:group {"className":"container legal","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}},"border":{"top":{"color":"var:preset|color|background-alt","width":"1px"}}},"backgroundColor":"background","layout":{"type":"constrained"}} -->
+<div class="wp-block-group container legal has-background-background-color has-background" style="border-top-color:var(--wp--preset--color--background-alt);border-top-width:1px;padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)">
+	<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|20"}}} -->
+	<div class="wp-block-group">
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.85rem"}},"textColor":"foreground-alt"} -->
+		<p class="has-foreground-alt-color has-text-color" style="font-size:0.85rem"><a href="/mentions-legales/">Mentions légales</a></p>
+		<!-- /wp:paragraph -->
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.85rem"}},"textColor":"foreground-alt"} -->
+		<p class="has-foreground-alt-color has-text-color" style="font-size:0.85rem">-</p>
+		<!-- /wp:paragraph -->
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.85rem"}},"textColor":"foreground-alt"} -->
+		<p class="has-foreground-alt-color has-text-color" style="font-size:0.85rem"><a href="/cgv/">CGV</a></p>
+		<!-- /wp:paragraph -->
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.85rem"}},"textColor":"foreground-alt"} -->
+		<p class="has-foreground-alt-color has-text-color" style="font-size:0.85rem">-</p>
+		<!-- /wp:paragraph -->
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.85rem"}},"textColor":"foreground-alt"} -->
+		<p class="has-foreground-alt-color has-text-color" style="font-size:0.85rem"><a href="/politique-de-confidentialite/">Politique de confidentialité</a></p>
+		<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"bandeau_bottom","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}},"backgroundColor":"secondary","layout":{"type":"constrained"}} -->
+<div class="wp-block-group bandeau_bottom has-secondary-background-color has-background" style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)">
+	<!-- wp:group {"className":"container","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|10"}}} -->
+	<div class="wp-block-group container">
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.85rem"}},"textColor":"background"} -->
+		<p class="has-background-color has-text-color" style="font-size:0.85rem">©2025 - Wiwilbild x</p>
+		<!-- /wp:paragraph -->
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"0.85rem"}},"textColor":"background"} -->
+		<p class="has-background-color has-text-color" style="font-size:0.85rem"><a href="https://agencebinocle.bzh/" target="_blank" rel="noreferrer noopener">Binocle</a></p>
+		<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:group -->
+</div>
 <!-- /wp:group -->
