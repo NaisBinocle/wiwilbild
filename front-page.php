@@ -175,6 +175,46 @@
                 </div>
             </section>
 
+            <!-- Section Shop by Room -->
+            <section class="shop-by-room">
+                <span class="sbr-surtitle">Parcourir par pièce</span>
+
+                <div class="sbr-container">
+                    <!-- Image gauche -->
+                    <div class="sbr-image sbr-image-left">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Salon" alt="Salon" data-room="0" class="active">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Salle+%C3%A0+manger" alt="Salle à manger" data-room="1">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Chambre" alt="Chambre" data-room="2">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Cuisine" alt="Cuisine" data-room="3">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Salle+de+bain" alt="Salle de bain" data-room="4">
+                    </div>
+
+                    <!-- Liste des pièces -->
+                    <div class="sbr-rooms">
+                        <ul>
+                            <li><a href="<?php echo home_url('/etiquette-produit/salon/'); ?>" data-room="0" class="active">Salon</a></li>
+                            <li><a href="<?php echo home_url('/etiquette-produit/salle-a-manger/'); ?>" data-room="1">Salle à manger</a></li>
+                            <li><a href="<?php echo home_url('/etiquette-produit/chambre/'); ?>" data-room="2">Chambre</a></li>
+                            <li><a href="<?php echo home_url('/etiquette-produit/cuisine/'); ?>" data-room="3">Cuisine</a></li>
+                            <li><a href="<?php echo home_url('/etiquette-produit/salle-de-bain/'); ?>" data-room="4">Salle de bain</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Image droite -->
+                    <div class="sbr-image sbr-image-right">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Salon" alt="Salon" data-room="0" class="active">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Salle+%C3%A0+manger" alt="Salle à manger" data-room="1">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Chambre" alt="Chambre" data-room="2">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Cuisine" alt="Cuisine" data-room="3">
+                        <img src="https://placehold.co/500x600/EAE9EC/362C49?text=Salle+de+bain" alt="Salle de bain" data-room="4">
+                    </div>
+                </div>
+
+                <a href="<?php echo home_url('/boutique/'); ?>" class="sbr-cta">
+                    Voir par pièce <span class="arrow">→</span>
+                </a>
+            </section>
+
             <section class="hp_catalogue">
                 <div class="container catalogue_title">
                     <div>
