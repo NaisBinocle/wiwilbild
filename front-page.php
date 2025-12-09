@@ -48,6 +48,10 @@
                     case 'reassurance':
                         get_template_part('reassurance');
                         break;
+
+                    case 'shop_by_room':
+                        get_template_part('template-parts/homepage/section', 'shop-by-room');
+                        break;
                 }
 
             endwhile;

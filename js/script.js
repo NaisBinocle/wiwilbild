@@ -282,3 +282,59 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, 500); // Délai pour attendre l'injection des hotspots
 });
+
+/* Shop by Room - Changement d'images au survol */
+document.addEventListener('DOMContentLoaded', function() {
+    const shopByRoom = document.querySelector('.shop-by-room');
+    if (!shopByRoom) return;
+
+    const roomLinks = shopByRoom.querySelectorAll('.sbr-rooms a');
+    const leftImages = shopByRoom.querySelectorAll('.sbr-image-left img');
+    const rightImages = shopByRoom.querySelectorAll('.sbr-image-right img');
+
+    function setActiveRoom(roomIndex) {
+        // Mettre à jour les liens
+        roomLinks.forEach(function(link, index) {
+            if (parseInt(link.getAttribute('data-room')) === roomIndex) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        // Mettre à jour les images gauche
+        leftImages.forEach(function(img) {
+            if (parseInt(img.getAttribute('data-room')) === roomIndex) {
+                img.classList.add('active');
+            } else {
+                img.classList.remove('active');
+            }
+        });
+
+        // Mettre à jour les images droite
+        rightImages.forEach(function(img) {
+            if (parseInt(img.getAttribute('data-room')) === roomIndex) {
+                img.classList.add('active');
+            } else {
+                img.classList.remove('active');
+            }
+        });
+    }
+
+    // Événement hover sur les liens
+    roomLinks.forEach(function(link) {
+        link.addEventListener('mouseenter', function() {
+            const roomIndex = parseInt(this.getAttribute('data-room'));
+            setActiveRoom(roomIndex);
+        });
+    });
+
+    // Sur mobile : événement click
+    roomLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            // Ne pas empêcher la navigation, mais mettre à jour l'affichage
+            const roomIndex = parseInt(this.getAttribute('data-room'));
+            setActiveRoom(roomIndex);
+        });
+    });
+});
