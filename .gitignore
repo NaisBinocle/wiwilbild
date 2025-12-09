@@ -33,3 +33,6 @@ style/*.css
 
 # Import script (contains security key)
 import-test-data.php
+
+# Claude documentation (local only)
+CLAUDE.md
