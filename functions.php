@@ -300,3 +300,11 @@ function wwb_hotspots_init_script() {
     </script>
     <?php
 }
+
+/**
+ * Placeholder par défaut pour les produits WooCommerce sans image
+ */
+add_filter('woocommerce_placeholder_img_src', 'wwb_custom_placeholder_img_src');
+function wwb_custom_placeholder_img_src($src) {
+    return 'https://placehold.co/600x600/EAE9EC/362C49?text=Produit';
+}
