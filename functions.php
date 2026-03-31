@@ -71,3 +71,57 @@ add_action( 'wp_enqueue_scripts', 'wwb_v2_enqueue_assets' );
 // Remove WP Generator meta tag
 // ─────────────────────────────────────────────
 remove_action( 'wp_head', 'wp_generator' );
+
+// ─────────────────────────────────────────────
+// Hotspots interactifs sur images produits
+// ─────────────────────────────────────────────
+function wwb_get_product_image_hotspots( $product_id ) {
+    $tid = get_post_thumbnail_id( $product_id );
+    if ( ! $tid ) return array();
+    $data = get_post_meta( $tid, '_wwb_hotspots', true );
+    if ( empty( $data ) ) return array();
+    $h = json_decode( $data, true );
+    return is_array( $h ) ? $h : array();
+}
+
+function wwb_display_product_hotspots( $hotspots ) {
+    if ( empty( $hotspots ) ) return;
+    echo '<div class="wwb-hotspots" id="product-hotspots">';
+    foreach ( $hotspots as $i => $h ) {
+        $x = isset( $h['x'] ) ? floatval( $h['x'] ) : 50;
+        $y = isset( $h['y'] ) ? floatval( $h['y'] ) : 50;
+        echo '<div class="wwb-hotspots__point" style="left:' . $x . '%;top:' . $y . '%;" data-index="' . $i . '">';
+        echo '<span class="wwb-hotspots__pulse"></span><span class="wwb-hotspots__dot">+</span>';
+        echo '<div class="wwb-hotspots__tooltip"><strong>' . esc_html( $h['title'] ?? '' ) . '</strong>';
+        if ( ! empty( $h['description'] ) ) echo '<p>' . esc_html( $h['description'] ) . '</p>';
+        echo '</div></div>';
+    }
+    echo '</div>';
+}
+
+add_action( 'wp_footer', 'wwb_v2_hotspots_init_script' );
+function wwb_v2_hotspots_init_script() {
+    if ( ! function_exists( 'is_product' ) || ! is_product() ) return;
+    global $product;
+    if ( ! $product ) return;
+    $hotspots = wwb_get_product_image_hotspots( $product->get_id() );
+    if ( empty( $hotspots ) ) return;
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var html = <?php ob_start(); wwb_display_product_hotspots( $hotspots ); echo json_encode( ob_get_clean() ); ?>;
+        var img = document.querySelector('.woocommerce-product-gallery__image');
+        if (img) { img.style.position = 'relative'; img.insertAdjacentHTML('beforeend', html); }
+    });
+    </script>
+    <?php
+}
+
+// ACF Hotspots admin field
+$wwb_hotspots_field = get_template_directory() . '/acf-hotspots-field.php';
+if ( ! file_exists( $wwb_hotspots_field ) ) {
+    $wwb_hotspots_field = ABSPATH . 'wp-content/themes/WWB/acf-hotspots-field.php';
+}
+if ( file_exists( $wwb_hotspots_field ) ) {
+    require_once $wwb_hotspots_field;
+}

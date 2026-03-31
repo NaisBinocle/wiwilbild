@@ -26,79 +26,77 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 		<p class="stock out-of-stock"><?php echo esc_html( apply_filters( 'woocommerce_out_of_stock_message', __( 'This product is currently out of stock and unavailable.', 'woocommerce' ) ) ); ?></p>
 	<?php else : ?>
 
-		<div class="wwb-variations">
-			<?php foreach ( $attributes as $attribute_name => $options ) : ?>
-				<div class="wwb-variations__group" data-attribute="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>">
+		<table class="variations" cellspacing="0" role="presentation">
+			<tbody>
+				<?php foreach ( $attributes as $attribute_name => $options ) : ?>
+					<tr>
+						<th class="label">
+							<label for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>">
+								<?php echo wc_attribute_label( $attribute_name ); ?>
+							</label>
+						</th>
+						<td class="value">
 
-					<label class="wwb-variations__label" for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>">
-						<?php echo wc_attribute_label( $attribute_name ); ?>
-					</label>
+							<?php if ( strpos( $attribute_name, 'couleurs' ) !== false ) : ?>
+								<div class="wwb-color-swatches">
+									<?php foreach ( $options as $option ) :
+										$term = get_term_by( 'slug', $option, 'pa_couleurs' );
+										$color = $term && function_exists( 'get_field' )
+											? get_field( 'product_color_pick', 'pa_couleurs_' . $term->term_id )
+											: '#ccc';
+									?>
+										<button type="button"
+											class="wwb-color-swatches__swatch"
+											data-value="<?php echo esc_attr( $option ); ?>"
+											style="background-color: <?php echo esc_attr( $color ); ?>;"
+											title="<?php echo esc_attr( $term ? $term->name : $option ); ?>"
+											aria-label="<?php echo esc_attr( $term ? $term->name : $option ); ?>"></button>
+									<?php endforeach; ?>
+								</div>
+							<?php else : ?>
+								<div class="wwb-attribute-swatches">
+									<?php foreach ( $options as $option ) :
+										$term = get_term_by( 'slug', $option, $attribute_name );
+										$label = $term ? $term->name : $option;
+										if ( strpos( $attribute_name, 'dimension' ) !== false ) {
+											if ( strpos( $label, 'x' ) === false && is_numeric( trim( str_replace( array( 'cm', ' ' ), '', $label ) ) ) ) {
+												$dim = trim( str_replace( array( 'cm', ' ' ), '', $label ) );
+												$label = $dim . 'x' . $dim . ' cm';
+											} elseif ( strpos( $label, 'cm' ) === false && strpos( $label, 'x' ) !== false ) {
+												$label .= ' cm';
+											}
+										}
+									?>
+										<button type="button"
+											class="wwb-attribute-swatches__swatch"
+											data-value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $label ); ?></button>
+									<?php endforeach; ?>
+								</div>
+							<?php endif; ?>
 
-					<?php if ( strpos( $attribute_name, 'couleurs' ) !== false ) : ?>
-						<!-- Color swatches -->
-						<div class="wwb-color-swatches">
-							<?php foreach ( $options as $option ) :
-								$term = get_term_by( 'slug', $option, 'pa_couleurs' );
-								$color = $term && function_exists( 'get_field' )
-									? get_field( 'product_color_pick', 'pa_couleurs_' . $term->term_id )
-									: '#ccc';
+							<select id="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"
+								name="attribute_<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"
+								class="wwb-hidden-select" aria-hidden="true">
+								<option value=""><?php echo esc_html__( 'Choose an option', 'woocommerce' ); ?></option>
+								<?php foreach ( $options as $option ) :
+									$term = get_term_by( 'slug', $option, $attribute_name );
+								?>
+									<option value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $term ? $term->name : $option ); ?></option>
+								<?php endforeach; ?>
+							</select>
+
+							<?php
+							if ( end( $attribute_keys ) === $attribute_name ) {
+								echo wp_kses_post( apply_filters( 'woocommerce_reset_variations_link',
+									'<a class="reset_variations" href="#" aria-label="' . esc_attr__( 'Clear options', 'woocommerce' ) . '">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>'
+								) );
+							}
 							?>
-								<button type="button"
-									class="wwb-color-swatches__swatch"
-									data-value="<?php echo esc_attr( $option ); ?>"
-									style="background-color: <?php echo esc_attr( $color ); ?>;"
-									title="<?php echo esc_attr( $term ? $term->name : $option ); ?>"
-									aria-label="<?php echo esc_attr( $term ? $term->name : $option ); ?>"></button>
-							<?php endforeach; ?>
-						</div>
-
-					<?php else : ?>
-						<!-- Attribute swatches (dimensions, etc.) -->
-						<div class="wwb-attribute-swatches">
-							<?php foreach ( $options as $option ) :
-								$term = get_term_by( 'slug', $option, $attribute_name );
-								$label = $term ? $term->name : $option;
-
-								// Auto-format dimension labels (e.g. "30" → "30x30 cm")
-								if ( strpos( $attribute_name, 'dimension' ) !== false ) {
-									if ( strpos( $label, 'x' ) === false && is_numeric( trim( str_replace( array( 'cm', ' ' ), '', $label ) ) ) ) {
-										$dim = trim( str_replace( array( 'cm', ' ' ), '', $label ) );
-										$label = $dim . 'x' . $dim . ' cm';
-									} elseif ( strpos( $label, 'cm' ) === false && strpos( $label, 'x' ) !== false ) {
-										$label .= ' cm';
-									}
-								}
-							?>
-								<button type="button"
-									class="wwb-attribute-swatches__swatch"
-									data-value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $label ); ?></button>
-							<?php endforeach; ?>
-						</div>
-					<?php endif; ?>
-
-					<!-- Hidden select for WooCommerce -->
-					<select id="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"
-						name="attribute_<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"
-						style="display:none;" aria-hidden="true">
-						<option value=""><?php echo esc_html__( 'Choose an option', 'woocommerce' ); ?></option>
-						<?php foreach ( $options as $option ) :
-							$term = get_term_by( 'slug', $option, $attribute_name );
-						?>
-							<option value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $term ? $term->name : $option ); ?></option>
-						<?php endforeach; ?>
-					</select>
-
-					<?php
-					if ( end( $attribute_keys ) === $attribute_name ) {
-						echo wp_kses_post( apply_filters( 'woocommerce_reset_variations_link',
-							'<a class="reset_variations" href="#" aria-label="' . esc_attr__( 'Clear options', 'woocommerce' ) . '">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>'
-						) );
-					}
-					?>
-
-				</div>
-			<?php endforeach; ?>
-		</div>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
 
 		<div class="reset_variations_alert screen-reader-text" role="alert" aria-live="polite" aria-relevant="all"></div>
 		<?php do_action( 'woocommerce_after_variations_table' ); ?>

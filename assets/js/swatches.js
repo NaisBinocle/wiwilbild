@@ -1,18 +1,33 @@
 /**
  * WWB V2 — Color & Attribute Swatches
- * Vanilla JS — No jQuery dependency
+ * Uses jQuery trigger for WooCommerce compatibility (WC listens via jQuery events)
  */
 document.addEventListener('DOMContentLoaded', function () {
+
+	// Hide native selects (WC needs them in DOM but not visible)
+	document.querySelectorAll('select.wwb-hidden-select').forEach(function(s) {
+		s.style.cssText = 'position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;opacity:0!important;pointer-events:none!important;';
+	});
+
+	// Helper: trigger change on select (jQuery for WC, vanilla fallback)
+	function triggerChange(select) {
+		if (window.jQuery) {
+			jQuery(select).trigger('change');
+		} else {
+			select.dispatchEvent(new Event('change', { bubbles: true }));
+		}
+	}
+
 	// Color swatches → sync hidden <select>
 	document.querySelectorAll('.wwb-color-swatches__swatch').forEach(function (swatch) {
 		swatch.addEventListener('click', function () {
 			var value = this.getAttribute('data-value');
-			var container = this.closest('td') || this.closest('.value');
+			var container = this.closest('.wwb-variations__group') || this.closest('td') || this.closest('.value');
 			var select = container ? container.querySelector('select') : null;
 
 			if (select) {
 				select.value = value;
-				select.dispatchEvent(new Event('change', { bubbles: true }));
+				triggerChange(select);
 			}
 
 			// Update selection state
@@ -23,16 +38,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	});
 
-	// Attribute swatches (dimensions, etc.) → sync hidden <select>
+	// Attribute swatches (dimensions, vitrage, etc.) → sync hidden <select>
 	document.querySelectorAll('.wwb-attribute-swatches__swatch').forEach(function (swatch) {
 		swatch.addEventListener('click', function () {
 			var value = this.getAttribute('data-value');
-			var container = this.closest('td') || this.closest('.value');
+			var container = this.closest('.wwb-variations__group') || this.closest('td') || this.closest('.value');
 			var select = container ? container.querySelector('select') : null;
 
 			if (select) {
 				select.value = value;
-				select.dispatchEvent(new Event('change', { bubbles: true }));
+				triggerChange(select);
 			}
 
 			this.closest('.wwb-attribute-swatches')
@@ -57,9 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	ajouterSuffixeM2();
 
 	// Re-apply after variation selection
-	var variationsForm = document.querySelector('form.variations_form');
-	if (variationsForm) {
-		variationsForm.addEventListener('found_variation', function () {
+	if (window.jQuery) {
+		jQuery('form.variations_form').on('found_variation', function () {
 			ajouterSuffixeM2();
 		});
 	}

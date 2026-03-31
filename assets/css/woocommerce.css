@@ -143,6 +143,39 @@
 	margin-bottom: 24px;
 }
 
+/* ─── Hide native selects when swatches are present ─── */
+.woocommerce div.product form.variations_form table.variations td.value select.wwb-hidden-select {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
+	opacity: 0 !important;
+}
+
+/* Clean up variations table */
+.woocommerce div.product form.variations_form table.variations {
+	border: none;
+	width: 100%;
+}
+
+.woocommerce div.product form.variations_form table.variations td,
+.woocommerce div.product form.variations_form table.variations th {
+	border: none;
+	padding: 8px 0;
+	vertical-align: top;
+}
+
+.woocommerce div.product form.variations_form table.variations th.label label {
+	font-weight: 600;
+	font-size: 14px;
+	color: var(--wp--preset--color--foreground);
+}
+
 /* ─── Variation Form ─── */
 .woocommerce div.product form.variations_form .variations {
 	width: 100%;
