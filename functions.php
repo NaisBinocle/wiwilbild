@@ -73,6 +73,11 @@ add_action( 'wp_enqueue_scripts', 'wwb_v2_enqueue_assets' );
 remove_action( 'wp_head', 'wp_generator' );
 
 // ─────────────────────────────────────────────
+// Configurateur Fenêtre Sur Mesure
+// ─────────────────────────────────────────────
+require_once get_template_directory() . '/inc/class-wwb-configurator.php';
+
+// ─────────────────────────────────────────────
 // Hotspots interactifs sur images produits
 // ─────────────────────────────────────────────
 function wwb_get_product_image_hotspots( $product_id ) {
