@@ -100,7 +100,7 @@
 							"fontFamily": "Playfair Display",
 							"fontWeight": "600",
 							"fontStyle": "italic",
-							"src": ["file:./assets/fonts/PlayfairDisplay/PlayfairDisplay-SemiBoldItalic.woff2"]
+							"src": ["https://fonts.gstatic.com/s/playfairdisplay/v37/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTbtY.woff2"]
 						}
 					]
 				},
