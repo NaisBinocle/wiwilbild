@@ -70,8 +70,8 @@ class WWB_Configurator {
     const MAX_HEIGHT = 2200;
 
     public static function init() {
-        // Replace add-to-cart for configurator products
-        add_action( 'woocommerce_single_product_summary', [ __CLASS__, 'maybe_render_configurator' ], 25 );
+        // Override content-single-product template for configurator products
+        add_filter( 'wc_get_template_part', [ __CLASS__, 'override_template_part' ], 10, 3 );
         // Hide default add-to-cart for configurator products
         add_filter( 'woocommerce_product_add_to_cart_text', [ __CLASS__, 'modify_button_text' ], 10, 2 );
         // Handle custom add-to-cart
@@ -88,6 +88,19 @@ class WWB_Configurator {
         add_action( 'woocommerce_checkout_create_order_line_item', [ __CLASS__, 'save_order_item_meta' ], 10, 4 );
         // Enqueue scripts
         add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_scripts' ] );
+    }
+
+    public static function override_template_part( $template, $slug, $name ) {
+        if ( $slug === 'content' && $name === 'single-product' ) {
+            global $product;
+            if ( $product && $product->get_meta( '_wwb_configurator' ) === 'yes' ) {
+                $custom = get_template_directory() . '/woocommerce/content-single-product-configurator.php';
+                if ( file_exists( $custom ) ) {
+                    return $custom;
+                }
+            }
+        }
+        return $template;
     }
 
     public static function is_configurator_product( $product = null ) {

@@ -2,6 +2,34 @@
    WWB V2 — Configurateur Fenêtre Sur Mesure
    ═══════════════════════════════════════════ */
 
+/* ─── Configurator product page (full-width layout) ─── */
+.wwb-product-configurator {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 24px var(--wp--preset--spacing--70, 80px);
+}
+
+.wwb-product-configurator__header {
+	margin-bottom: 32px;
+}
+
+.wwb-product-configurator__header .product_title {
+	font-family: var(--wp--preset--font-family--heading, 'Playfair Display', serif);
+	font-weight: 800;
+	font-size: 2.5rem;
+	color: var(--wp--preset--color--primary-dark, #362C49);
+	margin-bottom: 8px;
+}
+
+.wwb-product-configurator__breadcrumbs {
+	margin-bottom: 16px;
+}
+
+.wwb-product-configurator__tabs {
+	margin-top: 48px;
+}
+
+/* ─── Configurator Widget ─── */
 .wwb-cfg {
 	max-width: 1280px;
 	margin: 0 auto;
