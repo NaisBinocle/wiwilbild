@@ -1,0 +1,318 @@
+/* ═══════════════════════════════════════════
+   WWB V2 — Custom CSS (BEM)
+   Complète theme.json pour les composants
+   qui ne peuvent pas être stylés via presets.
+   ═══════════════════════════════════════════ */
+
+/* ─── CSS Custom Properties (from theme.json custom) ─── */
+:root {
+	--wwb-radius-card: var(--wp--custom--radius--card, 20px);
+	--wwb-radius-button: var(--wp--custom--radius--button, 12px);
+	--wwb-radius-badge: var(--wp--custom--radius--badge, 6px);
+	--wwb-radius-pill: var(--wp--custom--radius--pill, 100px);
+	--wwb-gap-product: var(--wp--custom--gap--product-grid, 24px);
+	--wwb-gap-testimonial: var(--wp--custom--gap--testimonial-grid, 28px);
+}
+
+/* ─── Section Label (eyebrow) ─── */
+.wwb-label {
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: var(--wp--preset--color--primary);
+}
+
+/* ─── Product Card ─── */
+.wwb-product-card {
+	background: var(--wp--preset--color--background);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--wwb-radius-card);
+	overflow: hidden;
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.wwb-product-card:hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+	transform: translateY(-2px);
+}
+
+.wwb-product-card__image {
+	position: relative;
+	height: 220px;
+	background: var(--wp--preset--color--surface);
+	overflow: hidden;
+}
+
+.wwb-product-card__image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.wwb-product-card__badge {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	padding: 4px 8px;
+	border-radius: var(--wwb-radius-badge);
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: #fff;
+}
+
+.wwb-product-card__badge--bestseller { background: var(--wp--preset--color--primary); }
+.wwb-product-card__badge--popular { background: var(--wp--preset--color--secondary); }
+.wwb-product-card__badge--new { background: var(--wp--preset--color--primary-dark); }
+.wwb-product-card__badge--sale { background: var(--wp--preset--color--success); }
+
+.wwb-product-card__wishlist {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.9);
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s;
+}
+
+.wwb-product-card__wishlist:hover {
+	background: #fff;
+}
+
+.wwb-product-card__content {
+	padding: 18px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.wwb-product-card__title {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--wp--preset--color--foreground);
+	text-decoration: none;
+}
+
+.wwb-product-card__title:hover {
+	color: var(--wp--preset--color--primary);
+}
+
+.wwb-product-card__rating {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.wwb-product-card__stars {
+	color: var(--wp--preset--color--warning);
+	font-size: 12px;
+}
+
+.wwb-product-card__count {
+	font-size: 11px;
+	color: var(--wp--preset--color--muted);
+}
+
+.wwb-product-card__price {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+}
+
+.wwb-product-card__price-current {
+	font-size: 18px;
+	font-weight: 800;
+	color: var(--wp--preset--color--primary-dark);
+}
+
+.wwb-product-card__price-unit {
+	font-size: 12px;
+	color: var(--wp--preset--color--muted);
+}
+
+.wwb-product-card__price-old {
+	font-size: 11px;
+	color: var(--wp--preset--color--muted);
+	text-decoration: line-through;
+}
+
+.wwb-product-card__discount {
+	font-size: 11px;
+	font-weight: 700;
+	color: var(--wp--preset--color--success);
+	background: #DCFCE7;
+	padding: 2px 6px;
+	border-radius: var(--wwb-radius-sm, 4px);
+}
+
+/* ─── Color Swatches (WooCommerce) ─── */
+.wwb-color-swatches {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 8px 0;
+}
+
+.wwb-color-swatches__swatch {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	border: 2px solid var(--wp--preset--color--border);
+	cursor: pointer;
+	transition: border-color 0.2s, box-shadow 0.2s;
+	padding: 0;
+}
+
+.wwb-color-swatches__swatch:hover,
+.wwb-color-swatches__swatch.selected {
+	border-color: var(--wp--preset--color--primary-dark);
+	box-shadow: 0 0 0 2px var(--wp--preset--color--primary);
+}
+
+/* ─── Attribute Swatches (dimensions, etc.) ─── */
+.wwb-attribute-swatches {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 8px 0;
+}
+
+.wwb-attribute-swatches__swatch {
+	padding: 8px 16px;
+	border: 1.5px solid var(--wp--preset--color--border);
+	border-radius: var(--wwb-radius-button);
+	background: var(--wp--preset--color--background);
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--wp--preset--color--foreground);
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.wwb-attribute-swatches__swatch:hover,
+.wwb-attribute-swatches__swatch.selected {
+	border-color: var(--wp--preset--color--primary);
+	background: #FFF0F8;
+	color: var(--wp--preset--color--primary-dark);
+}
+
+/* ─── Hotspots ─── */
+.wwb-hotspots {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 10;
+}
+
+.wwb-hotspots__point {
+	position: absolute;
+	pointer-events: all;
+	cursor: pointer;
+	z-index: 11;
+}
+
+.wwb-hotspots__pulse {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: rgba(255, 153, 218, 0.3);
+	animation: wwb-pulse 2s infinite;
+}
+
+@keyframes wwb-pulse {
+	0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+	100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+.wwb-hotspots__dot {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--primary-dark);
+	font-size: 14px;
+	font-weight: 700;
+	z-index: 2;
+}
+
+.wwb-hotspots__tooltip {
+	display: none;
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 12px;
+	background: var(--wp--preset--color--background);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--wwb-radius-button);
+	padding: 12px 16px;
+	min-width: 180px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	font-size: 13px;
+	line-height: 1.5;
+	z-index: 20;
+}
+
+.wwb-hotspots__point.active .wwb-hotspots__tooltip,
+.wwb-hotspots__point:hover .wwb-hotspots__tooltip {
+	display: block;
+}
+
+.wwb-hotspots__tooltip strong {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+	color: var(--wp--preset--color--foreground);
+}
+
+.wwb-hotspots__tooltip p {
+	margin: 0;
+	color: var(--wp--preset--color--body);
+}
+
+/* ─── Header sticky ─── */
+.wp-block-template-part[data-area="header"] {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	background: var(--wp--preset--color--background);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+	:root {
+		--wp--preset--spacing--70: 40px;
+	}
+}
+
+@media (max-width: 768px) {
+	:root {
+		--wp--preset--spacing--70: 20px;
+		--wp--preset--spacing--80: 60px;
+	}
+
+	/* Stack columns on mobile */
+	.wp-block-columns {
+		flex-direction: column !important;
+	}
+}
