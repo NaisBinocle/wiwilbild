@@ -3,7 +3,7 @@
  * WWB V2 — Thème FSE Wiwilbild
  *
  * functions.php léger : setup FSE, enqueue assets, pattern categories.
- * Les hooks WooCommerce sont dans mu-plugins/wwb-woocommerce.php.
+ * Les hooks WooCommerce sont dans inc/woocommerce.php.
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -99,6 +99,13 @@ add_filter( 'render_block', function( $content, $block ) {
     );
     return $content;
 }, 10, 2 );
+
+// ─────────────────────────────────────────────
+// WooCommerce Customizations
+// ─────────────────────────────────────────────
+if ( class_exists( 'WooCommerce' ) ) {
+    require_once get_template_directory() . '/inc/woocommerce.php';
+}
 
 // ─────────────────────────────────────────────
 // Configurateur Fenêtre Sur Mesure
