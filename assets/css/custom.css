@@ -14,6 +14,16 @@
 	--wwb-gap-testimonial: var(--wp--custom--gap--testimonial-grid, 28px);
 }
 
+/* ─── Logo ─── */
+.wwb-logo {
+	margin: 0 !important;
+}
+
+.wwb-logo img {
+	height: 36px;
+	width: auto;
+}
+
 /* ─── Hidden select (visible to WooCommerce JS, hidden to user) ─── */
 table.variations td.value select.wwb-hidden-select,
 select.wwb-hidden-select {
@@ -311,6 +321,34 @@ select.wwb-hidden-select {
 	top: 0;
 	z-index: 100;
 	background: var(--wp--preset--color--background);
+}
+
+/* ─── Footer links on dark bg ─── */
+.has-footer-bg-background-color a,
+.has-footer-bg-background-color .wp-block-list a,
+.has-footer-bg-background-color p a {
+	color: var(--wp--preset--color--muted) !important;
+	text-decoration: none;
+}
+
+.has-footer-bg-background-color a:hover,
+.has-footer-bg-background-color .wp-block-list a:hover,
+.has-footer-bg-background-color p a:hover {
+	color: var(--wp--preset--color--background) !important;
+}
+
+/* ─── WooCommerce Product Collection — fix broken images ─── */
+.wc-block-product-template .wc-block-product-image {
+	background: var(--wp--preset--color--surface);
+	border-radius: var(--wwb-radius-card) var(--wwb-radius-card) 0 0;
+	overflow: hidden;
+	aspect-ratio: 4/3;
+}
+
+.wc-block-product-template .wc-block-product-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 /* ─── Responsive ─── */

@@ -73,6 +73,14 @@ add_action( 'wp_enqueue_scripts', 'wwb_v2_enqueue_assets' );
 remove_action( 'wp_head', 'wp_generator' );
 
 // ─────────────────────────────────────────────
+// Favicon SVG
+// ─────────────────────────────────────────────
+add_action( 'wp_head', function() {
+    $favicon = get_template_directory_uri() . '/assets/img/favicon.svg';
+    echo '<link rel="icon" href="' . esc_url( $favicon ) . '" type="image/svg+xml">' . "\n";
+} );
+
+// ─────────────────────────────────────────────
 // Configurateur Fenêtre Sur Mesure
 // ─────────────────────────────────────────────
 require_once get_template_directory() . '/inc/class-wwb-configurator.php';
