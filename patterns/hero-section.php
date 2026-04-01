@@ -31,11 +31,11 @@
 			<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 			<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)">
 				<!-- wp:button {"backgroundColor":"primary","textColor":"primary-dark","style":{"typography":{"fontWeight":"600"}}} -->
-				<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-weight:600" href="/boutique/">Découvrir le catalogue →</a></div>
+				<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-weight:600" href="<?php echo esc_url( home_url( '/boutique/' ) ); ?>">Découvrir le catalogue →</a></div>
 				<!-- /wp:button -->
 
 				<!-- wp:button {"className":"is-style-outline","style":{"border":{"width":"1.5px","color":"var:preset|color|border"},"typography":{"fontWeight":"600"}},"textColor":"foreground"} -->
-				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-foreground-color has-text-color wp-element-button" style="border-color:var(--wp--preset--color--border);border-width:1.5px;font-weight:600" href="/contact/">Parler à un conseiller</a></div>
+				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-foreground-color has-text-color wp-element-button" style="border-color:var(--wp--preset--color--border);border-width:1.5px;font-weight:600" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Parler à un conseiller</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->

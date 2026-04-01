@@ -25,7 +25,7 @@
 	<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 	<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)">
 		<!-- wp:button {"backgroundColor":"primary","textColor":"primary-dark","style":{"typography":{"fontWeight":"600"}}} -->
-		<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-weight:600" href="/espace-pro/">Accéder à l'espace pro →</a></div>
+		<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-weight:600" href="<?php echo esc_url( home_url( '/espace-pro/' ) ); ?>">Accéder à l'espace pro →</a></div>
 		<!-- /wp:button -->
 	</div>
 	<!-- /wp:buttons -->

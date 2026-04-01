@@ -81,6 +81,26 @@ add_action( 'wp_head', function() {
 } );
 
 // ─────────────────────────────────────────────
+// Fix hardcoded links in HTML template parts
+// Uses home_url() so it works in subdirectory (dev) and root (prod)
+// ─────────────────────────────────────────────
+add_filter( 'render_block', function( $content, $block ) {
+    if ( empty( $block['blockName'] ) || $block['blockName'] !== 'core/template-part' ) return $content;
+    $base = home_url();
+    // Logo link
+    $content = str_replace( 'href="/wiwilbild/"', 'href="' . esc_url( $base ) . '/"', $content );
+    // Espace Pro link
+    $content = str_replace( 'href="/mon-compte/"', 'href="' . esc_url( home_url( '/mon-compte/' ) ) . '"', $content );
+    // Logo image src
+    $content = str_replace(
+        'src="/wiwilbild/wp-content/themes/wwb-v2/',
+        'src="' . esc_url( get_template_directory_uri() ) . '/',
+        $content
+    );
+    return $content;
+}, 10, 2 );
+
+// ─────────────────────────────────────────────
 // Configurateur Fenêtre Sur Mesure
 // ─────────────────────────────────────────────
 require_once get_template_directory() . '/inc/class-wwb-configurator.php';

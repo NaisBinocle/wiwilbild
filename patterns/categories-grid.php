@@ -40,7 +40,7 @@
 				<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|25"}}}} -->
 				<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--25)">
 					<!-- wp:button {"backgroundColor":"primary","textColor":"primary-dark","style":{"typography":{"fontWeight":"600","fontSize":"14px"}}} -->
-					<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-size:14px;font-weight:600" href="/categorie-produit/carrelages/">Découvrir →</a></div>
+					<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-size:14px;font-weight:600" href="<?php echo esc_url( home_url( '/categorie-produit/carrelages/' ) ); ?>">Découvrir →</a></div>
 					<!-- /wp:button -->
 				</div>
 				<!-- /wp:buttons -->

@@ -37,7 +37,7 @@
 	<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 	<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)">
 		<!-- wp:button {"className":"is-style-outline","style":{"border":{"width":"1.5px","color":"var:preset|color|border"},"typography":{"fontWeight":"600"}},"textColor":"foreground"} -->
-		<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-foreground-color has-text-color wp-element-button" style="border-color:var(--wp--preset--color--border);border-width:1.5px;font-weight:600" href="/boutique/">Voir tous les produits →</a></div>
+		<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-foreground-color has-text-color wp-element-button" style="border-color:var(--wp--preset--color--border);border-width:1.5px;font-weight:600" href="<?php echo esc_url( home_url( '/boutique/' ) ); ?>">Voir tous les produits →</a></div>
 		<!-- /wp:button -->
 	</div>
 	<!-- /wp:buttons -->
