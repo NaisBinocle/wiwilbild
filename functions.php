@@ -87,16 +87,27 @@ add_action( 'wp_head', function() {
 add_filter( 'render_block', function( $content, $block ) {
     if ( empty( $block['blockName'] ) || $block['blockName'] !== 'core/template-part' ) return $content;
     $base = home_url();
+
     // Logo link
     $content = str_replace( 'href="/wiwilbild/"', 'href="' . esc_url( $base ) . '/"', $content );
-    // Espace Pro link
-    $content = str_replace( 'href="/mon-compte/"', 'href="' . esc_url( home_url( '/mon-compte/' ) ) . '"', $content );
+
     // Logo image src
     $content = str_replace(
         'src="/wiwilbild/wp-content/themes/wwb-v2/',
         'src="' . esc_url( get_template_directory_uri() ) . '/',
         $content
     );
+
+    // Rewrite all relative navigation links to use home_url()
+    // Matches href="/some-path/" but NOT href="/wiwilbild/" (already handled) or href="#"
+    $content = preg_replace_callback(
+        '#href="(/(?!wiwilbild/)[a-z0-9\-/]+/)"#i',
+        function( $m ) {
+            return 'href="' . esc_url( home_url( $m[1] ) ) . '"';
+        },
+        $content
+    );
+
     return $content;
 }, 10, 2 );
 
@@ -106,6 +117,16 @@ add_filter( 'render_block', function( $content, $block ) {
 if ( class_exists( 'WooCommerce' ) ) {
     require_once get_template_directory() . '/inc/woocommerce.php';
 }
+
+// ─────────────────────────────────────────────
+// Setup Pages (création auto des pages légales/support)
+// ─────────────────────────────────────────────
+require_once get_template_directory() . '/inc/wwb-setup-pages.php';
+
+// ─────────────────────────────────────────────
+// Bandeau Cookies RGPD
+// ─────────────────────────────────────────────
+require_once get_template_directory() . '/inc/wwb-cookie-banner.php';
 
 // ─────────────────────────────────────────────
 // Configurateur Fenêtre Sur Mesure

@@ -40,9 +40,9 @@ $h = function( $path ) { return esc_url( home_url( $path ) ); };
 
 			<!-- wp:list {"style":{"typography":{"fontSize":"14px"},"spacing":{"blockGap":"var:preset|spacing|10"}},"textColor":"muted"} -->
 			<ul class="has-muted-color has-text-color" style="font-size:14px">
-				<li><a href="<?php echo $h( '/categorie-produit/menuiseries/' ); ?>">Menuiseries</a></li>
-				<li><a href="<?php echo $h( '/categorie-produit/carrelages/' ); ?>">Carrelages</a></li>
-				<li><a href="<?php echo $h( '/categorie-produit/couvertures/' ); ?>">Couvertures</a></li>
+				<li><a href="<?php echo $h( '/categorie-produit/fenetres-pvc/' ); ?>">Fenêtres PVC</a></li>
+				<li><a href="<?php echo $h( '/categorie-produit/portes-fenetres-pvc/' ); ?>">Portes-fenêtres PVC</a></li>
+				<li><a href="<?php echo $h( '/categorie-produit/volets-roulants/' ); ?>">Volets roulants</a></li>
 				<li><a href="<?php echo $h( '/boutique/' ); ?>">Tous les produits</a></li>
 			</ul>
 			<!-- /wp:list -->
@@ -111,7 +111,7 @@ $h = function( $path ) { return esc_url( home_url( $path ) ); };
 		<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
 		<div class="wp-block-group">
 			<!-- wp:paragraph {"style":{"typography":{"fontSize":"13px"}},"textColor":"muted"} -->
-			<p class="has-muted-color has-text-color" style="font-size:13px"><a href="<?php echo $h( '/mentions-legales/' ); ?>">Mentions légales</a> · <a href="<?php echo $h( '/cgv/' ); ?>">CGV</a> · <a href="<?php echo $h( '/politique-de-confidentialite/' ); ?>">Politique de confidentialité</a></p>
+			<p class="has-muted-color has-text-color" style="font-size:13px"><a href="<?php echo $h( '/mentions-legales/' ); ?>">Mentions légales</a> · <a href="<?php echo $h( '/cgv/' ); ?>">CGV</a> · <a href="<?php echo $h( '/politique-de-confidentialite/' ); ?>">Politique de confidentialité</a> · <a href="#" onclick="wwbCookieShowBanner(); return false;">Cookies</a></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
