@@ -101,10 +101,18 @@ $attributes = $product->get_attributes();
 			<!-- Reassurance -->
 			<div class="wwb-single__reassurance">
 				<div class="wwb-single__reassurance-item">
-					<span>📦</span> Livraison offerte dès 500€
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 20a2 2 0 100-4 2 2 0 000 4zM18 20a2 2 0 100-4 2 2 0 000 4z"/></svg>
+					<div>
+						<strong>Livraison offerte dès 500€</strong>
+						<span>Transporteur spécialisé avec prise de RDV</span>
+					</div>
 				</div>
 				<div class="wwb-single__reassurance-item">
-					<span>🛡️</span> Garantie 10 ans constructeur
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+					<div>
+						<strong>Garantie 10 ans constructeur</strong>
+						<span>Pièces et main d'œuvre de fabrication</span>
+					</div>
 				</div>
 			</div>
 

@@ -340,10 +340,13 @@ class WWB_Configurator {
         if ( ! $product || ! self::is_configurator_product( $product ) ) return;
 
         $theme_uri = get_template_directory_uri();
+        $theme_dir = get_template_directory();
         $version   = wp_get_theme()->get( 'Version' );
+        $css_ver   = $version . '-' . filemtime( $theme_dir . '/assets/css/configurator.css' );
+        $js_ver    = $version . '-' . filemtime( $theme_dir . '/assets/js/configurator.js' );
 
-        wp_enqueue_style( 'wwb-configurator', $theme_uri . '/assets/css/configurator.css', [], $version );
-        wp_enqueue_script( 'wwb-configurator', $theme_uri . '/assets/js/configurator.js', [], $version, true );
+        wp_enqueue_style( 'wwb-configurator', $theme_uri . '/assets/css/configurator.css', [], $css_ver );
+        wp_enqueue_script( 'wwb-configurator', $theme_uri . '/assets/js/configurator.js', [], $js_ver, true );
 
         wp_localize_script( 'wwb-configurator', 'wwbConfigurator', [
             'ajaxUrl'   => admin_url( 'admin-ajax.php' ),

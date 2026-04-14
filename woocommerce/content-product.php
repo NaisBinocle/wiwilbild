@@ -45,17 +45,16 @@ $average      = $product->get_average_rating();
 // Detect product line
 $is_carrelage = has_term( 'carrelage', 'product_cat', $product->get_id() );
 
-// Material tag (menuiserie only) — extract from product name or attribute
+// Material tag (menuiserie only) — masqué tant qu'on n'a que du PVC
 $material_tag = '';
 if ( ! $is_carrelage ) {
 	$name_lower = strtolower( $product->get_name() );
-	if ( strpos( $name_lower, 'pvc' ) !== false ) {
-		$material_tag = 'PVC';
-	} elseif ( strpos( $name_lower, 'aluminium' ) !== false || strpos( $name_lower, 'alu' ) !== false ) {
+	if ( strpos( $name_lower, 'aluminium' ) !== false || strpos( $name_lower, 'alu' ) !== false ) {
 		$material_tag = 'Aluminium';
 	} elseif ( strpos( $name_lower, 'bois' ) !== false ) {
 		$material_tag = 'Bois';
 	}
+	// PVC non affiché : tout le catalogue actuel est en PVC, le tag est redondant.
 }
 
 // Négoce price (carrelage) or showroom price (menuiserie)
@@ -118,11 +117,6 @@ $negoce_price = $product->get_meta( '_wwb_negoce_price' );
 					<span>Livré <?php echo esc_html( $delivery ); ?> sem.</span>
 				</div>
 			<?php endif; ?>
-
-			<span class="wwb-product-card__cta">
-				<span><?php echo $is_carrelage ? 'Voir le produit' : 'Configurer'; ?></span>
-				<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-			</span>
 
 		</div>
 

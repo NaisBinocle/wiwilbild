@@ -1982,9 +1982,10 @@ body.woocommerce-cart .wp-block-post-title {
 }
 
 .wwb-cart__total-price {
-	font-family: var(--wp--preset--font-family--heading);
-	font-size: 28px;
-	font-weight: 700;
+	font-family: 'Inter', sans-serif;
+	font-size: 26px;
+	font-weight: 800;
+	letter-spacing: -0.5px;
 	color: var(--wp--preset--color--primary-dark);
 }
 
@@ -3791,9 +3792,82 @@ body.woocommerce-checkout footer.wp-block-template-part {
 	background: #6a63bf;
 }
 
-/* Hide WC quantity input on menuiserie products (1 unit at a time) */
+/* Quantity stepper sur fiche produit menuiserie (pour ajouter N fenêtres identiques d'un coup) */
 .wwb-single .variations_form .quantity {
-	display: none;
+	display: inline-flex;
+	align-items: stretch;
+	border: 1.5px solid #D4D4D8;
+	border-radius: 10px;
+	overflow: hidden;
+	background: #fff;
+	height: 52px;
+	margin: 0;
+}
+.wwb-single .variations_form .quantity input[type="number"],
+.wwb-single .variations_form .qty {
+	width: 52px !important;
+	text-align: center;
+	border: none !important;
+	outline: none;
+	font-size: 15px;
+	font-weight: 700;
+	color: var(--wp--preset--color--foreground, #362C49);
+	padding: 0 4px;
+	background: transparent;
+	-moz-appearance: textfield;
+	appearance: textfield;
+	box-shadow: none !important;
+}
+.wwb-single .variations_form .quantity input[type="number"]::-webkit-inner-spin-button,
+.wwb-single .variations_form .quantity input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+.wwb-single__qty-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	min-width: 44px;
+	padding: 0;
+	background: #F8F7FC;
+	border: none;
+	color: #362C49;
+	font-size: 20px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background .15s ease, color .15s ease;
+	line-height: 1;
+}
+.wwb-single__qty-btn--minus { border-right: 1.5px solid #ECEAF0; }
+.wwb-single__qty-btn--plus { border-left: 1.5px solid #ECEAF0; }
+.wwb-single__qty-btn:hover {
+	background: #ECEAF0;
+	color: #7B74D0;
+}
+.wwb-single__qty-btn:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+/* Ligne qty + ATC côte à côte */
+.wwb-single .variations_form .single_variation_wrap .woocommerce-variation-add-to-cart,
+.wwb-single .variations_form .woocommerce-variation-add-to-cart {
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: stretch !important;
+	gap: 12px !important;
+	margin-top: 8px;
+}
+.wwb-single .variations_form .single_variation_wrap .woocommerce-variation-add-to-cart .quantity,
+.wwb-single .variations_form .woocommerce-variation-add-to-cart .quantity {
+	flex: 0 0 auto;
+}
+.wwb-single .variations_form .single_variation_wrap .woocommerce-variation-add-to-cart .single_add_to_cart_button,
+.wwb-single .variations_form .woocommerce-variation-add-to-cart .single_add_to_cart_button {
+	flex: 1 1 auto !important;
+	width: auto !important;
+	margin: 0 !important;
 }
 
 /* ─── Responsive: Menuiserie configurator ─── */
@@ -3914,22 +3988,54 @@ body.woocommerce-checkout footer.wp-block-template-part {
 
 /* Reassurance */
 .wwb-single__reassurance {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+	margin-top: 20px;
 }
 
 .wwb-single__reassurance-item {
 	display: flex;
-	align-items: center;
-	gap: 8px;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 14px 16px;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 10px;
+	background: var(--wp--preset--color--surface, #F8F7FC);
 	font-size: 13px;
 	color: var(--wp--preset--color--body);
 }
 
 .wwb-single__reassurance-item svg {
 	flex-shrink: 0;
-	color: var(--wp--preset--color--secondary);
+	width: 22px;
+	height: 22px;
+	color: var(--wp--preset--color--muted, #9490A6);
+	margin-top: 2px;
+}
+
+.wwb-single__reassurance-item > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.wwb-single__reassurance-item strong {
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--wp--preset--color--foreground);
+	line-height: 1.3;
+}
+
+.wwb-single__reassurance-item span {
+	font-size: 11px;
+	color: var(--wp--preset--color--muted);
+	line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+	.wwb-single__reassurance { grid-template-columns: 1fr; }
 }
 
 /* ─── Specs Section ─── */
@@ -5388,4 +5494,37 @@ body.woocommerce-checkout footer.wp-block-template-part {
 	color: var(--wp--preset--color--muted);
 	font-weight: 500;
 	margin-left: 8px;
+}
+
+/* Numéros d'étape dans les titres de config */
+.wwb-single__config-step {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background: var(--wp--preset--color--secondary, #7B74D0);
+	color: #fff;
+	font-size: 11px;
+	font-weight: 700;
+	flex-shrink: 0;
+}
+
+.wwb-single__config-title strong {
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--foreground, #362C49);
+}
+
+/* Respire entre "sur mesure" et la section suivante (vitrage) */
+.wwb-single__custom-link {
+	margin-bottom: 28px;
+}
+
+.wwb-single__custom-link + .wwb-single__config-section {
+	margin-top: 8px;
+	padding-top: 4px;
 }

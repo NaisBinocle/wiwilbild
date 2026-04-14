@@ -58,7 +58,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			<!-- Section: Tailles standard -->
 			<div class="wwb-single__config-section">
 				<div class="wwb-single__config-title">
-					<span>📦</span>
+					<span class="wwb-single__config-step">1</span>
 					<strong>LES MESURES STANDARD / LES + VENDUES</strong>
 				</div>
 				<p class="wwb-single__config-hint">Les dimensions sont exprimées en largeur × hauteur. Ces cotes correspondent aux dimensions tableau (côtes d'ouverture dans le mur).</p>
@@ -113,8 +113,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			<!-- Section: Vitrage -->
 			<div class="wwb-single__config-section">
 				<div class="wwb-single__config-title">
-					<span>🪟</span>
-					<strong>Vitrage</strong>
+					<span class="wwb-single__config-step">2</span>
+					<strong>VITRAGE</strong>
 				</div>
 				<div class="wwb-single__vitrage" data-config-group="vitrage">
 					<?php
@@ -163,8 +163,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 		?>
 			<div class="wwb-single__config-section">
 				<div class="wwb-single__config-title">
-					<span>🎨</span>
-					<strong>Coloris</strong>
+					<span class="wwb-single__config-step">3</span>
+					<strong>COLORIS</strong>
 					<span class="wwb-single__color-label" id="wwb-color-label">Blanc</span>
 				</div>
 				<div class="wwb-color-swatches" data-config-group="wwb_coloris">
@@ -191,8 +191,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			<!-- Section: Couleur -->
 			<div class="wwb-single__config-section">
 				<div class="wwb-single__config-title">
-					<span>🎨</span>
-					<strong>Couleur</strong>
+					<span class="wwb-single__config-step">3</span>
+					<strong>COLORIS</strong>
 				</div>
 				<div class="wwb-color-swatches" data-config-group="couleur">
 					<?php foreach ( $attr_couleur['options'] as $option ) :

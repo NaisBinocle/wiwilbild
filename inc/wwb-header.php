@@ -18,6 +18,67 @@ function wwb_header_is_active( $slug ) {
     return false;
 }
 
+function wwb_header_mini_cart() {
+    if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
+        return '<div class="wwb-mini-cart__empty">Panier indisponible.</div>';
+    }
+    $cart = WC()->cart;
+    $items = $cart->get_cart();
+    ob_start(); ?>
+    <div class="wwb-mini-cart">
+        <?php if ( empty( $items ) ) : ?>
+            <div class="wwb-mini-cart__empty">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+                <p>Votre panier est vide</p>
+                <a href="<?php echo esc_url( home_url( '/boutique/' ) ); ?>" class="wwb-mini-cart__shop-btn">Découvrir nos produits</a>
+            </div>
+        <?php else : ?>
+            <div class="wwb-mini-cart__list">
+                <?php foreach ( $items as $key => $item ) :
+                    $product = $item['data'];
+                    if ( ! $product ) continue;
+                    $title   = $product->get_name();
+                    $qty     = (int) $item['quantity'];
+                    $line    = $item['line_total'];
+                    $image   = $product->get_image( array( 56, 56 ) );
+                    $link    = $product->get_permalink( $item );
+                    $coloris = ! empty( $item['wwb_coloris_label'] ) ? $item['wwb_coloris_label'] : '';
+                ?>
+                    <div class="wwb-mini-cart__item">
+                        <a class="wwb-mini-cart__item-img" href="<?php echo esc_url( $link ); ?>"><?php echo $image; ?></a>
+                        <div class="wwb-mini-cart__item-body">
+                            <a class="wwb-mini-cart__item-title" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $title ); ?></a>
+                            <?php if ( $coloris ) : ?>
+                                <span class="wwb-mini-cart__item-meta">Coloris : <?php echo esc_html( $coloris ); ?></span>
+                            <?php endif; ?>
+                            <span class="wwb-mini-cart__item-price"><?php echo $qty; ?> × <?php echo wc_price( $line / max( $qty, 1 ) ); ?></span>
+                        </div>
+                        <a class="wwb-mini-cart__item-remove" href="<?php echo esc_url( wc_get_cart_remove_url( $key ) ); ?>" aria-label="Retirer">×</a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="wwb-mini-cart__footer">
+                <div class="wwb-mini-cart__total">
+                    <span>Sous-total</span>
+                    <strong><?php echo wp_kses_post( $cart->get_subtotal() ? wc_price( $cart->get_subtotal() ) : '' ); ?></strong>
+                </div>
+                <div class="wwb-mini-cart__ctas">
+                    <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="wwb-mini-cart__btn wwb-mini-cart__btn--secondary">Voir le panier</a>
+                    <a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="wwb-mini-cart__btn wwb-mini-cart__btn--primary">Commander</a>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+
+// Expose mini-cart as a WC fragment so it updates via AJAX
+add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
+    $fragments['div.wwb-header__mini-cart'] = '<div class="wwb-header__mini-cart">' . wwb_header_mini_cart() . '</div>';
+    return $fragments;
+} );
+
 function wwb_header_cart_count() {
     if ( function_exists( 'WC' ) && WC()->cart ) {
         return (int) WC()->cart->get_cart_contents_count();
@@ -84,10 +145,23 @@ function wwb_header_render() {
 
             <div class="wwb-header__actions">
                 <a class="wwb-header__btn wwb-header__btn--pro" href="<?php echo esc_url( $pro_url ); ?>">Espace Pro</a>
-                <a class="wwb-header__icon-btn" href="<?php echo esc_url( $account_url ); ?>" aria-label="Mon compte">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </a>
-                <a class="wwb-header__btn wwb-header__btn--cart" href="<?php echo esc_url( $cart_url ); ?>">Panier (<span class="wwb-header__cart-count"><?php echo (int) $cart_count; ?></span>)</a>
+                <?php if ( is_user_logged_in() ) :
+                    $u = wp_get_current_user();
+                    $initials = strtoupper( substr( $u->first_name, 0, 1 ) . substr( $u->last_name, 0, 1 ) );
+                    if ( ! trim( $initials ) ) $initials = strtoupper( substr( $u->display_name, 0, 1 ) );
+                ?>
+                    <a class="wwb-header__avatar" href="<?php echo esc_url( $account_url ); ?>" aria-label="Mon compte">
+                        <?php echo esc_html( $initials ); ?>
+                    </a>
+                <?php else : ?>
+                    <a class="wwb-header__icon-btn" href="<?php echo esc_url( $account_url ); ?>" aria-label="Mon compte">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </a>
+                <?php endif; ?>
+                <div class="wwb-header__cart-wrap">
+                    <a class="wwb-header__btn wwb-header__btn--cart" href="<?php echo esc_url( $cart_url ); ?>">Panier (<span class="wwb-header__cart-count"><?php echo (int) $cart_count; ?></span>)</a>
+                    <div class="wwb-header__mini-cart"><?php echo wwb_header_mini_cart(); ?></div>
+                </div>
             </div>
 
             <button class="wwb-header__burger" type="button" aria-label="Menu" data-wwb-burger>
@@ -135,16 +209,16 @@ function wwb_header_mega_menu() {
                     </span>
                     <span class="wwb-mega__card-text">
                         <span class="wwb-mega__card-title">1 vantail</span>
-                        <span class="wwb-mega__card-sub">12 dimensions · dès 180 €</span>
+                        <span class="wwb-mega__card-sub">10 dimensions · dès 180 €</span>
                     </span>
                 </a>
-                <a class="wwb-mega__card" href="<?php echo esc_url( $home . 'categorie-produit/fenetre-pvc-2-vantaux/' ); ?>">
+                <a class="wwb-mega__card" href="<?php echo esc_url( $home . 'categorie-produit/fenetres-pvc-2-vantaux/' ); ?>">
                     <span class="wwb-mega__card-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="18" rx="1.5"/><rect x="13" y="3" width="8" height="18" rx="1.5"/></svg>
                     </span>
                     <span class="wwb-mega__card-text">
                         <span class="wwb-mega__card-title">2 vantaux</span>
-                        <span class="wwb-mega__card-sub">24 dimensions · dès 310 €</span>
+                        <span class="wwb-mega__card-sub">10 dimensions · dès 310 €</span>
                     </span>
                 </a>
                 <a class="wwb-mega__card" href="<?php echo esc_url( $home . 'categorie-produit/fenetres-pvc-3-vantaux/' ); ?>">
@@ -153,10 +227,10 @@ function wwb_header_mega_menu() {
                     </span>
                     <span class="wwb-mega__card-text">
                         <span class="wwb-mega__card-title">3 vantaux</span>
-                        <span class="wwb-mega__card-sub">18 dimensions · dès 520 €</span>
+                        <span class="wwb-mega__card-sub">10 dimensions · dès 520 €</span>
                     </span>
                 </a>
-                <a class="wwb-mega__card" href="<?php echo esc_url( $home . 'categorie-produit/chassis-fixe/' ); ?>">
+                <a class="wwb-mega__card" href="<?php echo esc_url( $home . 'categorie-produit/chassis-fixe-pvc/' ); ?>">
                     <span class="wwb-mega__card-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1.5"/></svg>
                     </span>

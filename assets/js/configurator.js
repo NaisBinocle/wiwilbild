@@ -286,8 +286,21 @@
 					if (data.success) {
 						btn.textContent = '✓ Ajouté au panier !';
 						btn.classList.add('wwb-cfg__add-btn--success');
-						// Refresh mini-cart
+						// Apply fragments returned by the server (updates header cart count, mini-cart, etc.)
+						if (data.data && data.data.fragments) {
+							Object.keys(data.data.fragments).forEach(function (selector) {
+								document.querySelectorAll(selector).forEach(function (el) {
+									el.outerHTML = data.data.fragments[selector];
+								});
+							});
+						}
+						// Also trigger WC's own fragment refresh for any other listeners
 						if (window.jQuery) {
+							jQuery(document.body).trigger('added_to_cart', [
+								data.data && data.data.fragments ? data.data.fragments : null,
+								null,
+								null
+							]);
 							jQuery(document.body).trigger('wc_fragment_refresh');
 						}
 						setTimeout(function () {

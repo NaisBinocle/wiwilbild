@@ -1,28 +1,30 @@
 /**
- * WWB — Cart quantity stepper
- * Injecte des boutons +/- autour de chaque input qty du panier + trigger update WC.
+ * WWB — Quantity stepper (panier + fiche produit)
+ * Injecte des boutons +/- autour de chaque input qty et gère les triggers WC.
  */
 (function () {
     function enhance() {
-        const inputs = document.querySelectorAll('.wwb-cart-item__qty-input');
+        const inputs = document.querySelectorAll('.wwb-cart-item__qty-input, .wwb-single .variations_form .quantity input.qty, .wwb-single .variations_form .quantity input[type="number"]');
         inputs.forEach(function (input) {
             const parent = input.parentElement;
             if (!parent || parent.dataset.wwbEnhanced) return;
             parent.dataset.wwbEnhanced = '1';
-            parent.classList.add('wwb-cart-item__qty-stepper');
+            const isCart = input.classList.contains('wwb-cart-item__qty-input');
+            const btnCls = isCart ? 'wwb-cart-item__qty-btn' : 'wwb-single__qty-btn';
+            parent.classList.add(isCart ? 'wwb-cart-item__qty-stepper' : 'wwb-single__qty-stepper');
 
-            const min = parseInt(input.getAttribute('min')) || 0;
+            const min = parseInt(input.getAttribute('min')) || (isCart ? 0 : 1);
             const max = parseInt(input.getAttribute('max')) || 999;
 
             const minus = document.createElement('button');
             minus.type = 'button';
-            minus.className = 'wwb-cart-item__qty-btn wwb-cart-item__qty-btn--minus';
+            minus.className = btnCls + ' ' + btnCls + '--minus';
             minus.setAttribute('aria-label', 'Diminuer la quantité');
             minus.textContent = '−';
 
             const plus = document.createElement('button');
             plus.type = 'button';
-            plus.className = 'wwb-cart-item__qty-btn wwb-cart-item__qty-btn--plus';
+            plus.className = btnCls + ' ' + btnCls + '--plus';
             plus.setAttribute('aria-label', 'Augmenter la quantité');
             plus.textContent = '+';
 
@@ -37,7 +39,8 @@
 
             function fire() {
                 input.dispatchEvent(new Event('change', { bubbles: true }));
-                // Trigger WC update button if present
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+                // Trigger WC update button if present (cart only)
                 const form = input.closest('form.woocommerce-cart-form');
                 if (form) {
                     const updateBtn = form.querySelector('[name="update_cart"], .wwb-cart__update-btn');

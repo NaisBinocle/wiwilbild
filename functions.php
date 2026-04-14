@@ -68,8 +68,8 @@ function wwb_v2_enqueue_assets() {
         wp_enqueue_style( 'wwb-v3-homepage', $theme_uri . '/assets/css/v3-homepage.css', array(), file_exists( $v3_css ) ? filemtime( $v3_css ) : $version );
     }
 
-    // JS Cart qty stepper (page panier uniquement)
-    if ( function_exists( 'is_cart' ) && is_cart() ) {
+    // JS Qty stepper (panier + fiches produit menuiserie)
+    if ( ( function_exists( 'is_cart' ) && is_cart() ) || ( function_exists( 'is_product' ) && is_product() ) ) {
         wp_enqueue_script( 'wwb-v2-cart-qty', $theme_uri . '/assets/js/cart-qty.js', array( 'jquery' ), $version, true );
     }
 

@@ -639,6 +639,41 @@ add_action( 'woocommerce_after_main_content', function() {
         </section>
         <div class="wwb-shop__container"><!-- reopen container -->
 
+        <!-- Process : 3 étapes avec badges + icônes + liaison -->
+        <section class="wwb-shop__process">
+            <div class="wwb-shop__process-head">
+                <span class="wwb-shop__process-eyebrow">COMMENT ÇA MARCHE</span>
+                <h2>Commander sans se tromper</h2>
+                <p class="wwb-shop__process-intro">3 étapes simples pour recevoir vos fenêtres.</p>
+            </div>
+            <ol class="wwb-shop__process-grid">
+                <li class="wwb-shop__process-step">
+                    <span class="wwb-shop__process-badge">ÉTAPE 01</span>
+                    <span class="wwb-shop__process-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                    </span>
+                    <strong>Configurez en ligne</strong>
+                    <p>Choisissez dimensions, vitrage et couleur. Prix calculé en temps réel.</p>
+                </li>
+                <li class="wwb-shop__process-step">
+                    <span class="wwb-shop__process-badge">ÉTAPE 02</span>
+                    <span class="wwb-shop__process-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m9 11 3 3L22 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    <strong>Validez votre devis</strong>
+                    <p>Prix ferme. Paiement sécurisé ou financement possible jusqu'à 10x.</p>
+                </li>
+                <li class="wwb-shop__process-step">
+                    <span class="wwb-shop__process-badge">ÉTAPE 03</span>
+                    <span class="wwb-shop__process-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="1" y="3" width="15" height="13" stroke="currentColor" stroke-width="1.8"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/><circle cx="5.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="18.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg>
+                    </span>
+                    <strong>Recevez chez vous</strong>
+                    <p>Livraison 4-6 semaines sur rdv. Pose par artisan RGE en option.</p>
+                </li>
+            </ol>
+        </section>
+
         <!-- Bloc aide : 3 canaux centralisés (full width, gradient dark) -->
         <section class="wwb-shop__help">
             <div class="wwb-shop__help-inner">
@@ -674,41 +709,6 @@ add_action( 'woocommerce_after_main_content', function() {
                     </a>
                 </div>
             </div>
-        </section>
-
-        <!-- Process : 3 étapes avec badges + icônes + liaison -->
-        <section class="wwb-shop__process">
-            <div class="wwb-shop__process-head">
-                <span class="wwb-shop__process-eyebrow">COMMENT ÇA MARCHE</span>
-                <h2>Commander sans se tromper</h2>
-                <p class="wwb-shop__process-intro">3 étapes simples pour recevoir vos fenêtres.</p>
-            </div>
-            <ol class="wwb-shop__process-grid">
-                <li class="wwb-shop__process-step">
-                    <span class="wwb-shop__process-badge">ÉTAPE 01</span>
-                    <span class="wwb-shop__process-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-                    </span>
-                    <strong>Configurez en ligne</strong>
-                    <p>Choisissez dimensions, vitrage et couleur. Prix calculé en temps réel.</p>
-                </li>
-                <li class="wwb-shop__process-step">
-                    <span class="wwb-shop__process-badge">ÉTAPE 02</span>
-                    <span class="wwb-shop__process-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m9 11 3 3L22 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </span>
-                    <strong>Validez votre devis</strong>
-                    <p>Prix ferme. Paiement sécurisé ou financement possible jusqu'à 10x.</p>
-                </li>
-                <li class="wwb-shop__process-step">
-                    <span class="wwb-shop__process-badge">ÉTAPE 03</span>
-                    <span class="wwb-shop__process-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="1" y="3" width="15" height="13" stroke="currentColor" stroke-width="1.8"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/><circle cx="5.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="18.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg>
-                    </span>
-                    <strong>Recevez chez vous</strong>
-                    <p>Livraison 4-6 semaines sur rdv. Pose par artisan RGE en option.</p>
-                </li>
-            </ol>
         </section>
 
         </div><!-- /.wwb-shop__container -->
