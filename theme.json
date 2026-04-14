@@ -54,14 +54,64 @@
 					"name": "Fond blanc"
 				},
 				{
+					"slug": "primary-light",
+					"color": "#FFD6EE",
+					"name": "Rose clair"
+				},
+				{
+					"slug": "primary-soft",
+					"color": "#FFF0F8",
+					"name": "Rose très léger"
+				},
+				{
+					"slug": "secondary-soft",
+					"color": "#EEEDFA",
+					"name": "Lavande léger"
+				},
+				{
+					"slug": "text-dark",
+					"color": "#404040",
+					"name": "Texte fort"
+				},
+				{
+					"slug": "body-light",
+					"color": "#525252",
+					"name": "Texte courant sombre"
+				},
+				{
+					"slug": "surface-alt",
+					"color": "#F5F5F5",
+					"name": "Fond cards/inputs"
+				},
+				{
 					"slug": "success",
 					"color": "#16A34A",
 					"name": "Succès / Promo"
 				},
 				{
+					"slug": "success-light",
+					"color": "#BBF7D0",
+					"name": "Fond succès"
+				},
+				{
 					"slug": "warning",
 					"color": "#F59E0B",
 					"name": "Étoiles / Alerte"
+				},
+				{
+					"slug": "warning-dark",
+					"color": "#D97706",
+					"name": "Badge meilleure vente"
+				},
+				{
+					"slug": "info",
+					"color": "#3B82F6",
+					"name": "Info / Liens"
+				},
+				{
+					"slug": "info-light",
+					"color": "#BFDBFE",
+					"name": "Fond info"
 				},
 				{
 					"slug": "footer-bg",
@@ -330,6 +380,11 @@
 		{
 			"name": "blank",
 			"title": "Page vide (sans header/footer)",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "front-page-v2",
+			"title": "Homepage V3",
 			"postTypes": ["page"]
 		}
 	]

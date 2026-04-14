@@ -229,7 +229,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				<div class="wwb-cfg__nav-btns">
 					<button type="button" class="wwb-cfg__prev-btn" data-goto="2">← Retour</button>
 					<button type="button" id="wwb-cfg-add-to-cart" class="wwb-cfg__add-btn">
-						Ajouter au panier — <span id="wwb-cfg-btn-price">256,00 €</span>
+						Ajouter au panier
 					</button>
 				</div>
 			</div>

@@ -23,6 +23,7 @@ function wwb_v2_setup() {
     // Editor styles
     add_editor_style( 'assets/css/custom.css' );
     add_editor_style( 'assets/css/woocommerce.css' );
+    add_editor_style( 'assets/css/v3-homepage.css' );
 }
 add_action( 'after_setup_theme', 'wwb_v2_setup' );
 
@@ -53,16 +54,36 @@ function wwb_v2_enqueue_assets() {
     // CSS global
     wp_enqueue_style( 'wwb-v2-custom', $theme_uri . '/assets/css/custom.css', array(), $version );
 
+    // Header custom (site-wide)
+    wp_enqueue_style( 'wwb-v2-header', $theme_uri . '/assets/css/header.css', array( 'wwb-v2-custom' ), $version );
+
     // WooCommerce CSS (uniquement sur les pages WC)
     if ( class_exists( 'WooCommerce' ) ) {
         wp_enqueue_style( 'wwb-v2-woocommerce', $theme_uri . '/assets/css/woocommerce.css', array(), $version );
     }
 
+    // V3 Homepage CSS (page-home-v2 template only)
+    if ( is_page( 'home-v2' ) ) {
+        $v3_css = $theme_dir . '/assets/css/v3-homepage.css';
+        wp_enqueue_style( 'wwb-v3-homepage', $theme_uri . '/assets/css/v3-homepage.css', array(), file_exists( $v3_css ) ? filemtime( $v3_css ) : $version );
+    }
+
+    // JS Cart qty stepper (page panier uniquement)
+    if ( function_exists( 'is_cart' ) && is_cart() ) {
+        wp_enqueue_script( 'wwb-v2-cart-qty', $theme_uri . '/assets/js/cart-qty.js', array( 'jquery' ), $version, true );
+    }
+
     // JS conditionnel — pages produit uniquement
     if ( function_exists( 'is_product' ) && is_product() ) {
         wp_enqueue_script( 'wwb-v2-swatches', $theme_uri . '/assets/js/swatches.js', array(), $version, true );
-        wp_enqueue_script( 'wwb-v2-calculator', $theme_uri . '/assets/js/calculator.js', array(), $version, true );
+        wp_enqueue_script( 'wwb-v2-product-single', $theme_uri . '/assets/js/product-single.js', array(), $version . '-' . filemtime( $theme_dir . '/assets/js/product-single.js' ), true );
         wp_enqueue_script( 'wwb-v2-hotspots', $theme_uri . '/assets/js/hotspots.js', array(), $version, true );
+
+        // Calculator only for carrelage products
+        global $post;
+        if ( $post && has_term( 'carrelage', 'product_cat', $post->ID ) ) {
+            wp_enqueue_script( 'wwb-v2-calculator', $theme_uri . '/assets/js/calculator.js', array(), $version, true );
+        }
     }
 }
 add_action( 'wp_enqueue_scripts', 'wwb_v2_enqueue_assets' );
@@ -110,6 +131,18 @@ add_filter( 'render_block', function( $content, $block ) {
 
     return $content;
 }, 10, 2 );
+
+// ─────────────────────────────────────────────
+// Header custom (shortcode [wwb_header])
+// ─────────────────────────────────────────────
+require_once get_template_directory() . '/inc/wwb-header.php';
+
+// ─────────────────────────────────────────────
+// Setup Products Phase 1 (trigger /wp-admin/?wwb_setup_2v=1)
+// ─────────────────────────────────────────────
+if ( is_admin() ) {
+    require_once get_template_directory() . '/inc/wwb-setup-products.php';
+}
 
 // ─────────────────────────────────────────────
 // WooCommerce Customizations

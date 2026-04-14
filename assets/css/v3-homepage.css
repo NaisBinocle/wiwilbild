@@ -1,0 +1,286 @@
+/**
+ * V3 Homepage — Supplemental Styles
+ * Loaded only on the home-v2 page template.
+ */
+
+/* ─────────────────────────────────────────────
+   Global: Remove vertical gaps between full-width sections
+   ───────────────────────────────────────────── */
+body .wp-site-blocks {
+	gap: 0 !important;
+}
+body .wp-site-blocks > * {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+/* ─────────────────────────────────────────────
+   HERO
+   ───────────────────────────────────────────── */
+.wwb-v3-hero {
+	display: flex;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Right-side decorative gradient suggesting an image area */
+.wwb-v3-hero::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 45%;
+	height: 100%;
+	background: linear-gradient(135deg, rgba(123,116,208,0.12) 0%, rgba(255,153,218,0.10) 50%, rgba(54,44,73,0) 100%);
+	pointer-events: none;
+}
+
+/* Constrain hero content to the left ~60% */
+.wwb-v3-hero > .wp-block-group {
+	max-width: 640px;
+	position: relative;
+	z-index: 1;
+}
+
+/* ─────────────────────────────────────────────
+   PRODUCTS — card hover lift
+   ───────────────────────────────────────────── */
+body .wp-block-columns > .wp-block-column > .wp-block-group {
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+body .wp-block-columns > .wp-block-column > .wp-block-group:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 32px rgba(54,44,73,0.10);
+}
+
+/* ─────────────────────────────────────────────
+   REASSURANCE BAR
+   ───────────────────────────────────────────── */
+.wwb-v3-reassurance {
+	background: #FFF0F9;
+	border-top: 1px solid rgba(255, 153, 218, 0.4);
+	border-bottom: 1px solid rgba(255, 153, 218, 0.4);
+	padding: 28px 80px;
+}
+.wwb-v3-reassurance__inner {
+	max-width: 1440px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 32px;
+	flex-wrap: wrap;
+}
+.wwb-v3-reassurance__item {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	flex: 1 1 auto;
+}
+.wwb-v3-reassurance__badge {
+	width: 40px;
+	height: 40px;
+	min-width: 40px;
+	border-radius: 10px;
+	background: #FFFFFF;
+	color: var(--wp--preset--color--primary, #FF99DA);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.wwb-v3-reassurance__txt {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	line-height: 1.35;
+}
+.wwb-v3-reassurance__title {
+	color: var(--wp--preset--color--primary-dark, #362C49);
+	font-family: Inter, sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+}
+.wwb-v3-reassurance__sub {
+	color: #7B7488;
+	font-family: Inter, sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+}
+@media (max-width: 1024px) {
+	.wwb-v3-reassurance { padding: 24px 40px; }
+	.wwb-v3-reassurance__inner { gap: 20px; }
+}
+@media (max-width: 782px) {
+	.wwb-v3-reassurance { padding: 20px 24px; }
+	.wwb-v3-reassurance__item { flex: 1 1 45%; }
+}
+
+/* ─────────────────────────────────────────────
+   HOW IT WORKS — step number circle
+   ───────────────────────────────────────────── */
+.has-background[style*="border-radius:50%"] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 56px;
+	height: 56px;
+	min-width: 56px;
+	padding: 0 !important;
+	line-height: 1;
+}
+
+/* ─────────────────────────────────────────────
+   HOW IT WORKS — sticky stacking cards
+   ───────────────────────────────────────────── */
+.wwb-v3-steps {
+	position: relative;
+}
+.wwb-v3-steps > .wwb-v3-step {
+	position: sticky;
+	transform-origin: top center;
+	will-change: transform;
+}
+.wwb-v3-steps > .wwb-v3-step--1 { top: 100px; }
+.wwb-v3-steps > .wwb-v3-step--2 { top: 140px; }
+.wwb-v3-steps > .wwb-v3-step--3 { top: 180px; }
+
+@media (max-width: 782px) {
+	.wwb-v3-steps > .wwb-v3-step { position: relative; top: auto !important; }
+}
+
+/* ─────────────────────────────────────────────
+   TESTIMONIALS — card shadow
+   ───────────────────────────────────────────── */
+body [style*="background-color:#F8F7FC"] .wp-block-column .has-background-background-color {
+	box-shadow: 0 2px 16px rgba(54,44,73,0.06);
+}
+
+/* ─────────────────────────────────────────────
+   GUIDE — responsive 3-col HTML block
+   ───────────────────────────────────────────── */
+@media (max-width: 782px) {
+	body .wp-block-html > div[style*="display:flex"] {
+		flex-direction: column !important;
+	}
+	body .wp-block-html > div[style*="display:flex"] > div[style*="width:1px"] {
+		width: 100% !important;
+		height: 1px;
+	}
+}
+
+/* ─────────────────────────────────────────────
+   BLOG — featured article cover fallback
+   ───────────────────────────────────────────── */
+body .wp-block-cover.is-position-bottom-left {
+	background-color: var(--wp--preset--color--primary-dark);
+}
+
+/* ─────────────────────────────────────────────
+   BLOG — harmonisation hauteurs featured ↔ side
+   ───────────────────────────────────────────── */
+.wwb-v3-blog .wp-block-columns {
+	align-items: stretch;
+}
+.wwb-v3-blog .wp-block-column {
+	display: flex;
+	flex-direction: column;
+}
+.wwb-v3-blog__featured {
+	flex: 1;
+	min-height: 480px;
+	height: 100%;
+}
+.wwb-v3-blog__side {
+	display: flex !important;
+	flex-direction: column;
+	height: 100%;
+	gap: var(--wp--preset--spacing--30);
+	width: 100%;
+}
+/* Kill any inherited hover/group styling on side wrapper */
+.wwb-v3-blog__side,
+.wwb-v3-blog__side:hover {
+	background: transparent !important;
+	box-shadow: none !important;
+	transform: none !important;
+	transition: none !important;
+}
+.wwb-v3-blog__side > .wwb-v3-blog__card {
+	flex: 1;
+	display: flex !important;
+	flex-direction: column;
+	overflow: hidden;
+	min-height: 0;
+	width: 100%;
+	max-width: 100%;
+	cursor: pointer;
+	transition: transform .2s ease, box-shadow .2s ease;
+	will-change: transform;
+	gap: 0 !important;
+	padding: 0 !important;
+	--wp--style--block-gap: 0px;
+}
+.wwb-v3-blog__side > .wwb-v3-blog__card > * + * {
+	margin-block-start: 0 !important;
+	margin-top: 0 !important;
+}
+.wwb-v3-blog__side > .wwb-v3-blog__card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 28px rgba(54, 44, 73, 0.12);
+}
+/* Neutralise tout hover parasite hérité sur la colonne */
+.wwb-v3-blog__side:hover > .wwb-v3-blog__card:not(:hover) {
+	transform: none;
+	box-shadow: none;
+}
+.wwb-v3-blog__card > .wp-block-image {
+	margin: 0 !important;
+	flex: 1 1 auto;
+	min-height: 200px;
+	overflow: hidden;
+	display: block;
+	position: relative;
+}
+.wwb-v3-blog__card > .wp-block-image img {
+	width: 100%;
+	height: 100%;
+	min-height: 200px;
+	object-fit: cover;
+	display: block;
+	position: absolute;
+	inset: 0;
+}
+.wwb-v3-blog__card > .wp-block-group {
+	flex: 0 0 auto;
+	display: flex !important;
+	flex-direction: column;
+	gap: 4px !important;
+	padding: 14px 18px 16px !important;
+}
+.wwb-v3-blog__card > .wp-block-group > * {
+	margin: 0 !important;
+}
+.wwb-v3-blog__card h4 {
+	line-height: 1.3;
+	font-size: 15px !important;
+}
+.wwb-v3-blog__card .has-secondary-color {
+	font-size: 10px !important;
+}
+.wwb-v3-blog__card .has-muted-color {
+	font-size: 11px !important;
+}
+/* Effet hover aussi sur la card featured (indépendant) */
+.wwb-v3-blog__featured {
+	transition: transform .2s ease, box-shadow .2s ease;
+	cursor: pointer;
+	will-change: transform;
+}
+.wwb-v3-blog__featured:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 16px 40px rgba(54, 44, 73, 0.22);
+}
+@media (max-width: 782px) {
+	.wwb-v3-blog__featured { min-height: 320px; }
+}

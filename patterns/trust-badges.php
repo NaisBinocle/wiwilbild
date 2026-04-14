@@ -17,7 +17,7 @@
 		<!-- /wp:paragraph -->
 
 		<!-- wp:heading {"textAlign":"center","level":2} -->
-		<h2 class="wp-block-heading has-text-align-center">Particuliers et professionnels nous font confiance</h2>
+		<h2 class="wp-block-heading has-text-align-center">Des fenêtres de qualité, livrées partout en France</h2>
 		<!-- /wp:heading -->
 	</div>
 	<!-- /wp:group -->
@@ -30,10 +30,10 @@
 			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|15"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 			<div class="wp-block-group">
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px","fontWeight":"800"}},"textColor":"primary-dark"} -->
-				<p class="has-text-align-center has-primary-dark-color has-text-color" style="font-size:28px;font-weight:800">2 100+</p>
+				<p class="has-text-align-center has-primary-dark-color has-text-color" style="font-size:28px;font-weight:800">Certifié CE</p>
 				<!-- /wp:paragraph -->
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"12px","fontWeight":"500"}},"textColor":"body"} -->
-				<p class="has-text-align-center has-body-color has-text-color" style="font-size:12px;font-weight:500">Clients satisfaits</p>
+				<p class="has-text-align-center has-body-color has-text-color" style="font-size:12px;font-weight:500">Qualité européenne garantie</p>
 				<!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:group -->
@@ -45,10 +45,10 @@
 			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|15"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 			<div class="wp-block-group">
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px","fontWeight":"800"}},"textColor":"primary-dark"} -->
-				<p class="has-text-align-center has-primary-dark-color has-text-color" style="font-size:28px;font-weight:800">4.6/5</p>
+				<p class="has-text-align-center has-primary-dark-color has-text-color" style="font-size:28px;font-weight:800">-30%</p>
 				<!-- /wp:paragraph -->
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"12px","fontWeight":"500"}},"textColor":"body"} -->
-				<p class="has-text-align-center has-body-color has-text-color" style="font-size:12px;font-weight:500">Note moyenne</p>
+				<p class="has-text-align-center has-body-color has-text-color" style="font-size:12px;font-weight:500">vs prix du marché en moyenne</p>
 				<!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:group -->
@@ -60,10 +60,10 @@
 			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|15"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 			<div class="wp-block-group">
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"28px","fontWeight":"800"}},"textColor":"primary-dark"} -->
-				<p class="has-text-align-center has-primary-dark-color has-text-color" style="font-size:28px;font-weight:800">88%</p>
+				<p class="has-text-align-center has-primary-dark-color has-text-color" style="font-size:28px;font-weight:800">3-5 sem.</p>
 				<!-- /wp:paragraph -->
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"12px","fontWeight":"500"}},"textColor":"body"} -->
-				<p class="has-text-align-center has-body-color has-text-color" style="font-size:12px;font-weight:500">Taux de réachat</p>
+				<p class="has-text-align-center has-body-color has-text-color" style="font-size:12px;font-weight:500">Délai de livraison</p>
 				<!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:group -->

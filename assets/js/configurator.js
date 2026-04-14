@@ -292,7 +292,7 @@
 						}
 						setTimeout(function () {
 							btn.disabled = false;
-							btn.innerHTML = 'Ajouter au panier — <span id="wwb-cfg-btn-price">' + calculatePrice().toFixed(2).replace('.', ',') + ' €</span>';
+							btn.innerHTML = 'Ajouter au panier';
 							btn.classList.remove('wwb-cfg__add-btn--success');
 						}, 2000);
 					} else {

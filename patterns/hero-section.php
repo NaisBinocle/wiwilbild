@@ -17,25 +17,25 @@
 		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%">
 
 			<!-- wp:paragraph {"style":{"typography":{"fontSize":"12px","fontWeight":"700","textTransform":"uppercase","letterSpacing":"2px"}},"textColor":"primary"} -->
-			<p class="has-primary-color has-text-color" style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">N°1 matériaux premium en ligne</p>
+			<p class="has-primary-color has-text-color" style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">FENÊTRES SUR-MESURE</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:heading {"level":1,"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} -->
-			<h1 class="wp-block-heading" style="margin-top:var(--wp--preset--spacing--20)">Commandez vos matériaux <em>premium</em> en ligne, comme en showroom</h1>
+			<h1 class="wp-block-heading" style="margin-top:var(--wp--preset--spacing--20)">Vos fenêtres <em>sur-mesure</em>, direct des meilleures usines d'Europe.</h1>
 			<!-- /wp:heading -->
 
 			<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|25"}},"typography":{"fontSize":"17px","lineHeight":"1.7"}},"textColor":"body"} -->
-			<p class="has-body-color has-text-color" style="font-size:17px;line-height:1.7;margin-top:var(--wp--preset--spacing--25)">Carrelages, menuiseries, couvertures : explorez nos gammes et nos experts vous accompagnent à chaque étape.</p>
+			<p class="has-body-color has-text-color" style="font-size:17px;line-height:1.7;margin-top:var(--wp--preset--spacing--25)">Configurez en ligne, profitez de prix usine sans intermédiaire. Qualité certifiée CE, livraison à domicile ou sur chantier.</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 			<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)">
 				<!-- wp:button {"backgroundColor":"primary","textColor":"primary-dark","style":{"typography":{"fontWeight":"600"}}} -->
-				<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-weight:600" href="<?php echo esc_url( home_url( '/boutique/' ) ); ?>">Découvrir le catalogue →</a></div>
+				<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-weight:600" href="<?php echo esc_url( home_url( '/boutique/' ) ); ?>">Configurer ma fenêtre →</a></div>
 				<!-- /wp:button -->
 
 				<!-- wp:button {"className":"is-style-outline","style":{"border":{"width":"1.5px","color":"var:preset|color|border"},"typography":{"fontWeight":"600"}},"textColor":"foreground"} -->
-				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-foreground-color has-text-color wp-element-button" style="border-color:var(--wp--preset--color--border);border-width:1.5px;font-weight:600" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Parler à un conseiller</a></div>
+				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-foreground-color has-text-color wp-element-button" style="border-color:var(--wp--preset--color--border);border-width:1.5px;font-weight:600" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Être conseillé</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -46,7 +46,7 @@
 		<!-- wp:column {"verticalAlignment":"center","width":"50%"} -->
 		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:50%">
 			<!-- wp:image {"sizeSlug":"large","style":{"border":{"radius":"var:custom|radius|card"}}} -->
-			<figure class="wp-block-image size-large" style="border-radius:var(--wp--custom--radius--card)"><img src="https://placehold.co/720x520/EAE9EC/362C49?text=Hero+Image" alt="Matériaux premium Wiwilbild"/></figure>
+			<figure class="wp-block-image size-large" style="border-radius:var(--wp--custom--radius--card)"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=720&q=80" alt="Fenêtres sur-mesure Wiwilbild"/></figure>
 			<!-- /wp:image -->
 		</div>
 		<!-- /wp:column -->

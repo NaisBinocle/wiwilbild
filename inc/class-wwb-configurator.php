@@ -271,31 +271,45 @@ class WWB_Configurator {
         $config = $cart_item['wwb_config'];
         $labels = self::get_config_options();
 
+        // Map clé config → [ libellé affiché, source dans $labels ]
         $display_map = [
-            'type'      => 'Type',
-            'width'     => 'Largeur',
-            'height'    => 'Hauteur',
-            'ouverture' => 'Ouverture',
-            'dormant'   => 'Dormant',
-            'vitrage'   => 'Vitrage',
-            'coloris'   => 'Coloris',
-            'ferrage'   => 'Ferrage',
-            'grille'    => 'Grille aération',
-            'volet'     => 'Volet roulant',
+            'type'      => [ 'Type',            'types' ],
+            'width'     => [ 'Largeur',         null ],
+            'height'    => [ 'Hauteur',         null ],
+            'ouverture' => [ 'Ouverture',       'ouvertures' ],
+            'dormant'   => [ 'Dormant',         'dormants' ],
+            'vitrage'   => [ 'Vitrage',         'vitrages' ],
+            'coloris'   => [ 'Coloris',         'coloris' ],
+            'ferrage'   => [ 'Ferrage',         'ferrages' ],
+            'grille'    => [ 'Grille aération', 'grilles' ],
+            'volet'     => [ 'Volet roulant',   'volets' ],
         ];
 
-        foreach ( $display_map as $key => $label ) {
-            if ( ! empty( $config[ $key ] ) ) {
-                $value = $config[ $key ];
-                // Format dimensions
-                if ( $key === 'width' || $key === 'height' ) {
-                    $value = $value . ' mm';
-                }
-                $item_data[] = [
-                    'name'  => $label,
-                    'value' => $value,
-                ];
+        foreach ( $display_map as $key => $def ) {
+            list( $label, $source ) = $def;
+            if ( empty( $config[ $key ] ) ) continue;
+
+            $raw = $config[ $key ];
+
+            // Dimensions brutes
+            if ( $key === 'width' || $key === 'height' ) {
+                $value = $raw . ' mm';
+            } elseif ( $source && isset( $labels[ $source ][ $raw ] ) ) {
+                // Mapping slug → label lisible
+                $entry = $labels[ $source ][ $raw ];
+                $value = is_array( $entry ) ? ( $entry['label'] ?? $raw ) : $entry;
+            } else {
+                // Fallback : prettify le slug
+                $value = ucfirst( str_replace( [ '-', '_' ], ' ', $raw ) );
             }
+
+            // Masquer "Sans grille" / "Sans volet roulant" pour réduire le bruit
+            if ( in_array( $raw, array( 'grille-sans', 'vr-sans' ), true ) ) continue;
+
+            $item_data[] = [
+                'name'  => $label,
+                'value' => $value,
+            ];
         }
 
         return $item_data;

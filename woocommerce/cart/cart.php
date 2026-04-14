@@ -71,6 +71,12 @@ $cart = WC()->cart;
 						$item_data = implode( ' · ', $parts );
 					}
 
+					// Récap configurateur sur-mesure (pour fenêtres configurables)
+					$is_configurator = ! empty( $cart_item['wwb_configurator'] );
+					$config_meta = $is_configurator
+						? apply_filters( 'woocommerce_get_item_data', array(), $cart_item )
+						: array();
+
 					// Get product categories
 					$cats = get_the_terms( $product_id, 'product_cat' );
 					$cat_name = $cats && ! is_wp_error( $cats ) ? $cats[0]->name : '';
@@ -102,6 +108,47 @@ $cart = WC()->cart;
 							</h3>
 							<?php if ( $item_data ) : ?>
 								<p class="wwb-cart-item__meta"><?php echo esc_html( $item_data ); ?></p>
+							<?php endif; ?>
+
+							<?php if ( $is_configurator && ! empty( $config_meta ) ) :
+								// Ordre d'affichage (flat) — on fusionne dimensions en une seule ligne
+								$meta_by_name = array();
+								foreach ( $config_meta as $m ) {
+									if ( ! empty( $m['name'] ) && $m['value'] !== '' ) $meta_by_name[ $m['name'] ] = $m['value'];
+								}
+
+								// Ligne "Dimensions" combinée
+								$dim_parts = array();
+								if ( isset( $meta_by_name['Largeur'] ) ) $dim_parts[] = rtrim( $meta_by_name['Largeur'], ' m' );
+								if ( isset( $meta_by_name['Hauteur'] ) ) $dim_parts[] = rtrim( $meta_by_name['Hauteur'], ' m' );
+								$dim_combined = ! empty( $dim_parts ) ? implode( ' × ', $dim_parts ) . ' mm' : '';
+								unset( $meta_by_name['Largeur'], $meta_by_name['Hauteur'] );
+
+								$ordered = array();
+								if ( isset( $meta_by_name['Type'] ) )            $ordered['Type']            = $meta_by_name['Type'];
+								if ( $dim_combined )                             $ordered['Dimensions']      = $dim_combined;
+								if ( isset( $meta_by_name['Ouverture'] ) )       $ordered['Ouverture']       = $meta_by_name['Ouverture'];
+								if ( isset( $meta_by_name['Vitrage'] ) )         $ordered['Vitrage']         = $meta_by_name['Vitrage'];
+								if ( isset( $meta_by_name['Coloris'] ) )         $ordered['Coloris']         = $meta_by_name['Coloris'];
+								if ( isset( $meta_by_name['Dormant'] ) )         $ordered['Dormant']         = $meta_by_name['Dormant'];
+								if ( isset( $meta_by_name['Ferrage'] ) )         $ordered['Ferrage']         = $meta_by_name['Ferrage'];
+								if ( isset( $meta_by_name['Grille aération'] ) ) $ordered['Grille']          = $meta_by_name['Grille aération'];
+								if ( isset( $meta_by_name['Volet roulant'] ) )   $ordered['Volet roulant']   = $meta_by_name['Volet roulant'];
+							?>
+								<div class="wwb-cart-item__config">
+									<div class="wwb-cart-item__config-label">
+										<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+										Votre configuration sur mesure
+									</div>
+									<ul class="wwb-cart-item__config-list">
+										<?php foreach ( $ordered as $key => $val ) : ?>
+											<li class="wwb-cart-item__config-row">
+												<span class="wwb-cart-item__config-key"><?php echo esc_html( $key ); ?></span>
+												<span class="wwb-cart-item__config-val"><?php echo esc_html( $val ); ?></span>
+											</li>
+										<?php endforeach; ?>
+									</ul>
+								</div>
 							<?php endif; ?>
 
 							<div class="wwb-cart-item__actions">
@@ -252,11 +299,6 @@ $cart = WC()->cart;
 						Passer commande
 						<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
 					</a>
-
-					<button type="button" class="wwb-cart__devis-btn" disabled>
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-						ou Demander un devis
-					</button>
 
 					<!-- Trust badges -->
 					<div class="wwb-cart__trust">
