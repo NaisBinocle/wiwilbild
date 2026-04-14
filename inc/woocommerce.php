@@ -76,6 +76,44 @@ add_filter( 'wpseo_breadcrumb_separator', function() {
     return '<span class="wwb-breadcrumb__sep" aria-hidden="true">›</span>';
 } );
 
+// 5b. Breadcrumb produit : remplacer "Boutique" par la hiérarchie product_cat réelle
+add_filter( 'wpseo_breadcrumb_links', function( $links ) {
+    if ( ! function_exists( 'is_product' ) || ! is_product() ) return $links;
+
+    global $post;
+    $terms = wc_get_product_terms( $post->ID, 'product_cat', array( 'orderby' => 'parent', 'order' => 'ASC' ) );
+    if ( empty( $terms ) ) return $links;
+
+    // Trouver le terme le plus profond (celui sans enfant dans la liste ou avec le plus grand parent)
+    $deepest = $terms[0];
+    foreach ( $terms as $t ) {
+        if ( $t->parent && $t->parent !== 0 ) $deepest = $t;
+    }
+
+    // Construire la chaîne des ancêtres
+    $chain = array();
+    $cur = $deepest;
+    while ( $cur ) {
+        array_unshift( $chain, $cur );
+        if ( $cur->parent ) {
+            $cur = get_term( $cur->parent, 'product_cat' );
+            if ( is_wp_error( $cur ) ) break;
+        } else {
+            break;
+        }
+    }
+
+    // Reconstruire $links : garder Home (index 0), ajouter la chaîne de cats, puis le produit (dernier)
+    $home     = isset( $links[0] ) ? $links[0] : array( 'text' => 'Accueil', 'url' => home_url( '/' ) );
+    $last     = end( $links );
+    $new      = array( $home );
+    foreach ( $chain as $t ) {
+        $new[] = array( 'text' => $t->name, 'url' => get_term_link( $t ) );
+    }
+    $new[] = $last;
+    return $new;
+}, 10, 1 );
+
 // 6. Color swatches
 add_filter( 'woocommerce_dropdown_variation_attribute_options_html', 'wwb_v2_color_swatches', 10, 2 );
 

@@ -5528,3 +5528,14 @@ body.woocommerce-checkout footer.wp-block-template-part {
 	margin-top: 8px;
 	padding-top: 4px;
 }
+
+/* Espace Pro — reset margin/padding du main pour un layout edge-to-edge */
+body.page-id-1368 main.wp-block-group,
+body.page-inscription-pro main.wp-block-group {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+body.page-id-1368 main.wp-block-group > *,
+body.page-inscription-pro main.wp-block-group > * {
+	margin-top: 0 !important;
+}
