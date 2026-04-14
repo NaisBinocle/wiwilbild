@@ -27,14 +27,15 @@ $stars_html   = str_repeat( '★', $full_stars ) . str_repeat( '☆', 5 - $full_
 $attributes = $product->get_attributes();
 ?>
 
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'wwb-single', $product ); ?>>
-
-	<!-- Breadcrumb -->
-	<div class="wwb-single__breadcrumbs">
+<div class="wwb-single__breadcrumbs">
+	<div class="wwb-single__breadcrumbs-inner">
 		<?php if ( function_exists( 'yoast_breadcrumb' ) ) {
 			yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
 		} ?>
 	</div>
+</div>
+
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'wwb-single', $product ); ?>>
 
 	<?php do_action( 'woocommerce_before_single_product' ); ?>
 

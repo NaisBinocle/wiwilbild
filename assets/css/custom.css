@@ -3366,11 +3366,16 @@ body.woocommerce-checkout footer.wp-block-template-part {
 }
 
 .wwb-single__breadcrumbs {
+	width: 100%;
+	margin-top: 0 !important;
 	background: var(--wp--preset--color--surface, #fafafa);
-	margin: 0 -80px;
-	padding: 12px 80px;
 	font-size: 13px;
 	color: var(--wp--preset--color--muted);
+}
+.wwb-single__breadcrumbs-inner {
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 12px 80px;
 }
 
 .wwb-single__breadcrumbs a {
