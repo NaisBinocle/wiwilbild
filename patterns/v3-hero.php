@@ -32,7 +32,7 @@
 		<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|15"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
 		<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--40)">
 			<!-- wp:button {"backgroundColor":"primary","textColor":"primary-dark","style":{"typography":{"fontWeight":"600"}}} -->
-			<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-weight:600">Configurer ma fenêtre</a></div>
+			<div class="wp-block-button"><a class="wp-block-button__link has-primary-dark-color has-primary-background-color has-text-color has-background wp-element-button" style="font-weight:600" href="<?php echo esc_url( home_url( '/produit/fenetre-pvc-sur-mesure/' ) ); ?>">Configurer ma fenêtre</a></div>
 			<!-- /wp:button -->
 
 			<!-- wp:button {"className":"is-style-outline","style":{"border":{"width":"1.5px","color":"#FFFFFF"},"typography":{"fontWeight":"600"},"color":{"text":"#FFFFFF"}}} -->
