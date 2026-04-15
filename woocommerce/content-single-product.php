@@ -136,20 +136,29 @@ $attributes = $product->get_attributes();
 
 	<?php if ( $is_carrelage ) : ?>
 
-		<!-- Où poser ce carrelage ? -->
-		<section class="wwb-carrelage-usages">
-			<div class="wwb-carrelage-usages__inner">
-				<h2>Où poser ce carrelage ?</h2>
-				<p class="wwb-carrelage-usages__sub">Posable en sol et mural — compatible plancher chauffant.</p>
-				<div class="wwb-carrelage-usages__grid">
-					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🛁</span><strong>Salle de bain</strong><span>WC, douche, receveur</span></div>
-					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🍳</span><strong>Cuisine</strong><span>Sol et crédence</span></div>
-					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🛋️</span><strong>Salon & SAM</strong><span>Pièces à vivre</span></div>
-					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🚪</span><strong>Entrée & couloir</strong><span>Zones de passage</span></div>
-					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🔥</span><strong>Plancher chauffant</strong><span>Compatible basse T°</span></div>
-					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🏠</span><strong>Chambre</strong><span>Rendu chaleureux</span></div>
-				</div>
+		<!-- Description + Où poser (2 colonnes) -->
+		<section class="wwb-carrelage-desc">
+			<div class="wwb-carrelage-desc__col wwb-carrelage-desc__col--text">
+				<h2>Un carrelage vintage pour habiller vos pièces</h2>
+				<?php $full_desc = $product->get_description(); ?>
+				<?php if ( $full_desc ) : ?>
+					<div class="wwb-carrelage-desc__body"><?php echo wp_kses_post( wpautop( $full_desc ) ); ?></div>
+				<?php else : ?>
+					<p class="wwb-carrelage-desc__body">Inspiré des carreaux de ciment authentiques, ce carrelage en grès cérame émaillé apporte une touche rétro-chic à votre intérieur. Posable en sol et mural, compatible plancher chauffant.</p>
+				<?php endif; ?>
 			</div>
+
+			<aside class="wwb-carrelage-desc__col wwb-carrelage-desc__col--usages">
+				<h3>Où poser ce carrelage ?</h3>
+				<ul class="wwb-carrelage-desc__usages">
+					<li><span>🛁</span><div><strong>Salle de bain</strong><em>WC, douche, receveur</em></div></li>
+					<li><span>🍳</span><div><strong>Cuisine</strong><em>Sol et crédence</em></div></li>
+					<li><span>🛋️</span><div><strong>Salon & SAM</strong><em>Pièces à vivre</em></div></li>
+					<li><span>🚪</span><div><strong>Entrée & couloir</strong><em>Zones de passage</em></div></li>
+					<li><span>🔥</span><div><strong>Plancher chauffant</strong><em>Compatible basse T°</em></div></li>
+					<li><span>🏠</span><div><strong>Chambre</strong><em>Rendu chaleureux</em></div></li>
+				</ul>
+			</aside>
 		</section>
 
 		<!-- Questions fréquentes carrelage -->

@@ -218,60 +218,90 @@ ul.products.columns-4::after {
 	font-size: 14px;
 }
 
-/* ─── Où poser ce carrelage (usages) ─── */
-.wwb-carrelage-usages {
+/* ─── Description + Où poser (2 colonnes) ─── */
+.wwb-carrelage-desc {
+	display: grid;
+	grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+	gap: 48px;
 	margin: 48px 0;
-	padding: 40px 32px;
-	background: var(--wp--preset--color--surface);
-	border-radius: 16px;
+	align-items: start;
 }
 
-.wwb-carrelage-usages__inner { max-width: 1000px; margin: 0 auto; }
-
-.wwb-carrelage-usages h2 {
+.wwb-carrelage-desc h2 {
 	font-family: 'Playfair Display', Georgia, serif;
-	font-size: 28px;
+	font-size: 30px;
 	font-weight: 700;
 	color: var(--wp--preset--color--primary-dark);
-	margin: 0 0 6px;
+	margin: 0 0 18px;
+	line-height: 1.2;
 }
 
-.wwb-carrelage-usages__sub {
+.wwb-carrelage-desc__body {
 	color: var(--wp--preset--color--body);
-	margin: 0 0 24px;
-	font-size: 14px;
+	font-size: 15px;
+	line-height: 1.7;
 }
 
-.wwb-carrelage-usages__grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+.wwb-carrelage-desc__body p { margin: 0 0 14px; }
+.wwb-carrelage-desc__body p:last-child { margin-bottom: 0; }
+
+.wwb-carrelage-desc__col--usages {
+	background: var(--wp--preset--color--surface);
+	border-radius: 14px;
+	padding: 28px;
+}
+
+.wwb-carrelage-desc__col--usages h3 {
+	font-family: 'Inter', system-ui, sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--wp--preset--color--primary-dark);
+	margin: 0 0 16px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.wwb-carrelage-desc__usages {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
 	gap: 14px;
 }
 
-.wwb-carrelage-usages__item {
+.wwb-carrelage-desc__usages li {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+}
+
+.wwb-carrelage-desc__usages li > span {
+	font-size: 20px;
+	flex-shrink: 0;
+	line-height: 1.2;
+}
+
+.wwb-carrelage-desc__usages li > div {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
-	padding: 18px;
-	background: #FFFFFF;
-	border-radius: 10px;
-	border: 1px solid var(--wp--preset--color--border);
+	gap: 2px;
 }
 
-.wwb-carrelage-usages__item strong {
+.wwb-carrelage-desc__usages strong {
+	font-size: 13px;
 	color: var(--wp--preset--color--primary-dark);
-	font-size: 14px;
-	font-weight: 700;
+	font-weight: 600;
 }
 
-.wwb-carrelage-usages__item span:last-child {
-	color: var(--wp--preset--color--muted);
+.wwb-carrelage-desc__usages em {
 	font-size: 12px;
+	color: var(--wp--preset--color--muted);
+	font-style: normal;
 }
 
-.wwb-carrelage-usages__icon {
-	font-size: 22px;
-	margin-bottom: 4px;
+@media (max-width: 768px) {
+	.wwb-carrelage-desc { grid-template-columns: 1fr; gap: 24px; }
 }
 
 /* ─── Questions fréquentes carrelage ─── */
