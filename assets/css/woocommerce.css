@@ -218,6 +218,42 @@ ul.products.columns-4::after {
 	font-size: 14px;
 }
 
+/* ─── Onglets ancres (carrelage) ─── */
+.wwb-carrelage-tabs {
+	display: flex;
+	gap: 32px;
+	border-top: 1px solid var(--wp--preset--color--border);
+	border-bottom: 1px solid var(--wp--preset--color--border);
+	margin: 32px 0 0;
+	padding: 0;
+	overflow-x: auto;
+	scrollbar-width: none;
+}
+
+.wwb-carrelage-tabs::-webkit-scrollbar { display: none; }
+
+.wwb-carrelage-tabs__link {
+	padding: 16px 0;
+	font-family: 'Inter', system-ui, sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--wp--preset--color--body);
+	text-decoration: none;
+	white-space: nowrap;
+	border-bottom: 2px solid transparent;
+	transition: color 0.15s, border-color 0.15s;
+}
+
+.wwb-carrelage-tabs__link:hover {
+	color: var(--wp--preset--color--primary-dark);
+}
+
+.wwb-carrelage-tabs__link.is-active {
+	color: var(--wp--preset--color--secondary);
+	font-weight: 700;
+	border-bottom-color: var(--wp--preset--color--secondary);
+}
+
 /* ─── Description + Où poser (2 colonnes) ─── */
 .wwb-carrelage-desc {
 	display: grid;
@@ -253,12 +289,10 @@ ul.products.columns-4::after {
 
 .wwb-carrelage-desc__col--usages h3 {
 	font-family: 'Inter', system-ui, sans-serif;
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: 700;
 	color: var(--wp--preset--color--primary-dark);
-	margin: 0 0 16px;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
+	margin: 0 0 18px;
 }
 
 .wwb-carrelage-desc__usages {
@@ -306,19 +340,29 @@ ul.products.columns-4::after {
 
 /* ─── Questions fréquentes carrelage ─── */
 .wwb-carrelage-qr {
-	margin: 48px 0;
+	margin: 48px -32px;
+	padding: 56px 32px;
+	background: var(--wp--preset--color--surface);
+	border-radius: 16px;
+}
+
+.wwb-carrelage-qr__list {
 	max-width: 820px;
+	margin: 0 auto;
 }
 
 .wwb-carrelage-qr h2 {
+	max-width: 820px;
+	margin: 0 auto 24px;
 	font-family: 'Playfair Display', Georgia, serif;
 	font-size: 28px;
 	font-weight: 700;
 	color: var(--wp--preset--color--primary-dark);
-	margin: 0 0 20px;
 }
 
 .wwb-carrelage-qr__list {
+	max-width: 820px;
+	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;

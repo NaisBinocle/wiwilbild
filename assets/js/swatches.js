@@ -61,6 +61,37 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	});
 
+	// Onglets ancres carrelage : smooth scroll + active state au scroll
+	var tabLinks = document.querySelectorAll('.wwb-carrelage-tabs__link');
+	if (tabLinks.length) {
+		tabLinks.forEach(function (link) {
+			link.addEventListener('click', function (e) {
+				var target = document.querySelector(link.getAttribute('href'));
+				if (target) {
+					e.preventDefault();
+					tabLinks.forEach(function (l) { l.classList.remove('is-active'); });
+					link.classList.add('is-active');
+					var headerOffset = 100;
+					window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - headerOffset, behavior: 'smooth' });
+				}
+			});
+		});
+
+		// Update active tab on scroll
+		var sections = Array.from(tabLinks).map(function (l) {
+			return document.querySelector(l.getAttribute('href'));
+		}).filter(Boolean);
+
+		window.addEventListener('scroll', function () {
+			var pos = window.pageYOffset + 150;
+			var current = sections[0];
+			sections.forEach(function (s) { if (s.offsetTop <= pos) current = s; });
+			tabLinks.forEach(function (l) {
+				l.classList.toggle('is-active', l.getAttribute('href') === '#' + current.id);
+			});
+		}, { passive: true });
+	}
+
 	// Pré-sélection initiale (premier swatch couleur "is-active") → trigger pour afficher prix
 	document.querySelectorAll('.wwb-color-swatches').forEach(function (group) {
 		var initial = group.querySelector('.wwb-color-swatches__swatch.is-active');

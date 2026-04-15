@@ -136,8 +136,17 @@ $attributes = $product->get_attributes();
 
 	<?php if ( $is_carrelage ) : ?>
 
+		<!-- Onglets ancres (navigation rapide) -->
+		<?php $tabs_review_count = $review_count > 0 ? $review_count : 18; ?>
+		<nav class="wwb-carrelage-tabs" aria-label="Sections de la fiche produit">
+			<a href="#description" class="wwb-carrelage-tabs__link is-active">Description</a>
+			<a href="#qr" class="wwb-carrelage-tabs__link">Questions fréquentes</a>
+			<a href="#reviews" class="wwb-carrelage-tabs__link">Avis (<?php echo esc_html( $tabs_review_count ); ?>)</a>
+			<a href="#related" class="wwb-carrelage-tabs__link">Vous aimerez aussi</a>
+		</nav>
+
 		<!-- Description + Où poser (2 colonnes) -->
-		<section class="wwb-carrelage-desc">
+		<section id="description" class="wwb-carrelage-desc">
 			<div class="wwb-carrelage-desc__col wwb-carrelage-desc__col--text">
 				<h2>Un carrelage vintage pour habiller vos pièces</h2>
 				<?php $full_desc = $product->get_description(); ?>
@@ -162,7 +171,7 @@ $attributes = $product->get_attributes();
 		</section>
 
 		<!-- Questions fréquentes carrelage -->
-		<section class="wwb-carrelage-qr">
+		<section id="qr" class="wwb-carrelage-qr">
 			<h2>Questions fréquentes</h2>
 			<div class="wwb-carrelage-qr__list">
 				<details class="wwb-carrelage-qr__item" open>
@@ -266,7 +275,7 @@ $attributes = $product->get_attributes();
 	$display_rating   = $has_real_reviews && $rating > 0 ? number_format( $rating, 1 ) : '4,8';
 	$display_stars    = $has_real_reviews && $rating > 0 ? $stars_html : '★★★★★';
 	?>
-	<section class="wwb-single__reviews">
+	<section id="reviews" class="wwb-single__reviews">
 			<div class="wwb-single__reviews-header">
 				<h2>Avis clients (<?php echo esc_html( $display_count ); ?>)</h2>
 				<div class="wwb-single__reviews-score">
@@ -306,7 +315,7 @@ $attributes = $product->get_attributes();
 		</section>
 
 	<!-- Produits similaires -->
-	<section class="wwb-single__related">
+	<section id="related" class="wwb-single__related">
 		<?php
 		$related_ids = wc_get_related_products( $product->get_id(), 3 );
 		if ( ! empty( $related_ids ) ) : ?>
