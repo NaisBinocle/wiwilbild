@@ -3362,10 +3362,44 @@ body.woocommerce-checkout footer.wp-block-template-part {
    SINGLE PRODUCT — Fiche Menuiserie
    ═══════════════════════════════════════════ */
 
-.wwb-single {
+.wwb-single-main {
+	width: 100%;
+	max-width: none;
+}
+
+.wwb-single-main > .wwb-single,
+.wp-block-group.wwb-single-main .wwb-single {
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Children s'affichent en pleine largeur, et sont contraints via leur conteneur interne */
+.wwb-single > .wwb-single__hero,
+.wwb-single > .wwb-carrelage-tabs,
+.wwb-single > .wwb-carrelage-desc,
+.wwb-single > .wwb-single__specs,
+.wwb-single > .wwb-single__reviews,
+.wwb-single > .wwb-single__related {
 	max-width: 1440px;
-	margin: 0 auto;
-	padding: 0 80px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 80px;
+	padding-right: 80px;
+	box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+	.wwb-single > .wwb-single__hero,
+	.wwb-single > .wwb-carrelage-tabs,
+	.wwb-single > .wwb-carrelage-desc,
+	.wwb-single > .wwb-single__specs,
+	.wwb-single > .wwb-single__reviews,
+	.wwb-single > .wwb-single__related {
+		padding-left: 32px;
+		padding-right: 32px;
+	}
 }
 
 .wwb-single__breadcrumbs {

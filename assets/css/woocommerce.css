@@ -338,17 +338,17 @@ ul.products.columns-4::after {
 	.wwb-carrelage-desc { grid-template-columns: 1fr; gap: 24px; }
 }
 
-/* ─── Questions fréquentes carrelage ─── */
+/* ─── Questions fréquentes carrelage (full-bleed) ─── */
 .wwb-carrelage-qr {
-	margin: 48px -32px;
-	padding: 56px 32px;
+	width: 100%;
+	margin: 48px 0;
+	padding: 56px 80px;
 	background: var(--wp--preset--color--surface);
-	border-radius: 16px;
+	box-sizing: border-box;
 }
 
-.wwb-carrelage-qr__list {
-	max-width: 820px;
-	margin: 0 auto;
+@media (max-width: 1024px) {
+	.wwb-carrelage-qr { padding: 48px 32px; }
 }
 
 .wwb-carrelage-qr h2 {
