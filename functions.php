@@ -55,7 +55,7 @@ function wwb_v2_enqueue_assets() {
     wp_enqueue_style( 'wwb-v2-custom', $theme_uri . '/assets/css/custom.css', array(), $version . '-' . filemtime( $theme_dir . '/assets/css/custom.css' ) );
 
     // Header custom (site-wide)
-    wp_enqueue_style( 'wwb-v2-header', $theme_uri . '/assets/css/header.css', array( 'wwb-v2-custom' ), $version );
+    wp_enqueue_style( 'wwb-v2-header', $theme_uri . '/assets/css/header.css', array( 'wwb-v2-custom' ), $version . '-' . filemtime( $theme_dir . '/assets/css/header.css' ) );
 
     // WooCommerce CSS (uniquement sur les pages WC)
     if ( class_exists( 'WooCommerce' ) ) {
