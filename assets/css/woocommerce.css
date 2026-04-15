@@ -337,6 +337,40 @@ ul.products.columns-4::after {
 	color: var(--wp--preset--color--body);
 }
 
+/* ─── Carrelage : swatches couleurs (taille + ring) ─── */
+.product_cat-carrelage .wwb-single__config-section .wwb-color-swatches {
+	gap: 12px;
+}
+
+.product_cat-carrelage .wwb-color-swatches__swatch {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	border: 2px solid #FFFFFF;
+	box-shadow: 0 0 0 1px var(--wp--preset--color--border);
+	transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.product_cat-carrelage .wwb-color-swatches__swatch:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 0 0 2px var(--wp--preset--color--secondary);
+}
+
+.product_cat-carrelage .wwb-color-swatches__swatch.is-active,
+.product_cat-carrelage .wwb-color-swatches__swatch.selected {
+	box-shadow: 0 0 0 2px var(--wp--preset--color--primary-dark);
+	transform: none;
+}
+
+.product_cat-carrelage .wwb-single__config-title .wwb-single__color-label {
+	margin-left: auto;
+	font-weight: 500;
+	color: var(--wp--preset--color--muted);
+	font-size: 13px;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
 /* ─── Badge "Promo !" WooCommerce — restyle ─── */
 .wwb-single .onsale,
 .woocommerce span.onsale {

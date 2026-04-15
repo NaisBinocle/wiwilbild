@@ -75,7 +75,7 @@ function wwb_v2_enqueue_assets() {
 
     // JS conditionnel — pages produit uniquement
     if ( function_exists( 'is_product' ) && is_product() ) {
-        wp_enqueue_script( 'wwb-v2-swatches', $theme_uri . '/assets/js/swatches.js', array(), $version, true );
+        wp_enqueue_script( 'wwb-v2-swatches', $theme_uri . '/assets/js/swatches.js', array( 'jquery' ), $version . '-' . filemtime( $theme_dir . '/assets/js/swatches.js' ), true );
         wp_enqueue_script( 'wwb-v2-product-single', $theme_uri . '/assets/js/product-single.js', array(), $version . '-' . filemtime( $theme_dir . '/assets/js/product-single.js' ), true );
         wp_enqueue_script( 'wwb-v2-hotspots', $theme_uri . '/assets/js/hotspots.js', array(), $version, true );
 

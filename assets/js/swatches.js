@@ -18,43 +18,59 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	// Color swatches → sync hidden <select>
+	function findSelect(swatch) {
+		var container = swatch.closest('.wwb-single__config-section')
+			|| swatch.closest('.wwb-variations__group')
+			|| swatch.closest('td')
+			|| swatch.closest('.value');
+		return container ? container.querySelector('select') : null;
+	}
+
+	// Color swatches → sync hidden <select> + maj label dynamique
 	document.querySelectorAll('.wwb-color-swatches__swatch').forEach(function (swatch) {
 		swatch.addEventListener('click', function () {
-			var value = this.getAttribute('data-value');
-			var container = this.closest('.wwb-variations__group') || this.closest('td') || this.closest('.value');
-			var select = container ? container.querySelector('select') : null;
+			var value  = this.getAttribute('data-value');
+			var label  = this.getAttribute('data-label') || this.title || '';
+			var select = findSelect(this);
 
-			if (select) {
-				select.value = value;
-				triggerChange(select);
-			}
+			if (select) { select.value = value; triggerChange(select); }
 
-			// Update selection state
 			this.closest('.wwb-color-swatches')
 				.querySelectorAll('.wwb-color-swatches__swatch')
-				.forEach(function (s) { s.classList.remove('selected'); });
-			this.classList.add('selected');
+				.forEach(function (s) { s.classList.remove('selected', 'is-active'); });
+			this.classList.add('selected', 'is-active');
+
+			var section = this.closest('.wwb-single__config-section');
+			var lblEl   = section ? section.querySelector('[data-wwb-color-label]') : null;
+			if (lblEl && label) lblEl.textContent = label;
 		});
 	});
 
 	// Attribute swatches (dimensions, vitrage, etc.) → sync hidden <select>
 	document.querySelectorAll('.wwb-attribute-swatches__swatch').forEach(function (swatch) {
 		swatch.addEventListener('click', function () {
-			var value = this.getAttribute('data-value');
-			var container = this.closest('.wwb-variations__group') || this.closest('td') || this.closest('.value');
-			var select = container ? container.querySelector('select') : null;
+			var value  = this.getAttribute('data-value');
+			var select = findSelect(this);
 
-			if (select) {
-				select.value = value;
-				triggerChange(select);
-			}
+			if (select) { select.value = value; triggerChange(select); }
 
 			this.closest('.wwb-attribute-swatches')
 				.querySelectorAll('.wwb-attribute-swatches__swatch')
-				.forEach(function (s) { s.classList.remove('selected'); });
-			this.classList.add('selected');
+				.forEach(function (s) { s.classList.remove('selected', 'is-active'); });
+			this.classList.add('selected', 'is-active');
 		});
+	});
+
+	// Pré-sélection initiale (premier swatch couleur "is-active") → trigger pour afficher prix
+	document.querySelectorAll('.wwb-color-swatches').forEach(function (group) {
+		var initial = group.querySelector('.wwb-color-swatches__swatch.is-active');
+		if (initial) {
+			var select = findSelect(initial);
+			if (select && !select.value) {
+				select.value = initial.getAttribute('data-value');
+				triggerChange(select);
+			}
+		}
 	});
 
 	// Prix /m² pour les variations (catégorie carrelage)

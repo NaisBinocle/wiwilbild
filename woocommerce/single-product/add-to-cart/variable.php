@@ -273,78 +273,78 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 	<?php else : ?>
 
-		<?php // ── CARRELAGE LAYOUT (preserved) ── ?>
+		<?php // ── CARRELAGE LAYOUT — sections épurées, pas de table ── ?>
 
-		<table class="variations" cellspacing="0" role="presentation">
-			<tbody>
-				<?php foreach ( $attributes as $attribute_name => $options ) : ?>
-					<tr>
-						<th class="label">
-							<label for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>">
-								<?php echo wc_attribute_label( $attribute_name ); ?>
-							</label>
-						</th>
-						<td class="value">
-							<?php if ( strpos( $attribute_name, 'couleurs' ) !== false ) : ?>
-								<div class="wwb-color-swatches">
-									<?php foreach ( $options as $option ) :
-										$term = get_term_by( 'slug', $option, 'pa_couleurs' );
-										$color = $term && function_exists( 'get_field' )
-											? get_field( 'product_color_pick', 'pa_couleurs_' . $term->term_id )
-											: '#ccc';
-									?>
-										<button type="button"
-											class="wwb-color-swatches__swatch"
-											data-value="<?php echo esc_attr( $option ); ?>"
-											style="background-color: <?php echo esc_attr( $color ); ?>;"
-											title="<?php echo esc_attr( $term ? $term->name : $option ); ?>"
-											aria-label="<?php echo esc_attr( $term ? $term->name : $option ); ?>"></button>
-									<?php endforeach; ?>
-								</div>
-							<?php else : ?>
-								<div class="wwb-attribute-swatches">
-									<?php foreach ( $options as $option ) :
-										$term = get_term_by( 'slug', $option, $attribute_name );
-										$label = $term ? $term->name : $option;
-										if ( strpos( $attribute_name, 'dimension' ) !== false ) {
-											if ( strpos( $label, 'x' ) === false && is_numeric( trim( str_replace( array( 'cm', ' ' ), '', $label ) ) ) ) {
-												$dim = trim( str_replace( array( 'cm', ' ' ), '', $label ) );
-												$label = $dim . 'x' . $dim . ' cm';
-											} elseif ( strpos( $label, 'cm' ) === false && strpos( $label, 'x' ) !== false ) {
-												$label .= ' cm';
-											}
-										}
-									?>
-										<button type="button"
-											class="wwb-attribute-swatches__swatch"
-											data-value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $label ); ?></button>
-									<?php endforeach; ?>
-								</div>
-							<?php endif; ?>
+		<?php
+		$step = 1;
+		foreach ( $attributes as $attribute_name => $options ) :
+			$is_couleurs = ( strpos( $attribute_name, 'couleurs' ) !== false );
+			$attr_label  = wc_attribute_label( $attribute_name );
+			$first_term  = get_term_by( 'slug', reset( $options ), $attribute_name );
+			$first_label = $first_term ? $first_term->name : reset( $options );
+		?>
+			<div class="wwb-single__config-section">
+				<div class="wwb-single__config-title">
+					<span class="wwb-single__config-step"><?php echo esc_html( $step ); ?></span>
+					<strong><?php echo esc_html( strtoupper( $attr_label ) ); ?></strong>
+					<?php if ( $is_couleurs ) : ?>
+						<span class="wwb-single__color-label" data-wwb-color-label><?php echo esc_html( $first_label ); ?></span>
+					<?php endif; ?>
+				</div>
 
-							<select id="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"
-								name="attribute_<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"
-								class="wwb-hidden-select" aria-hidden="true">
-								<option value=""><?php esc_html_e( 'Choose an option', 'woocommerce' ); ?></option>
-								<?php foreach ( $options as $option ) :
-									$term = get_term_by( 'slug', $option, $attribute_name );
-								?>
-									<option value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $term ? $term->name : $option ); ?></option>
-								<?php endforeach; ?>
-							</select>
-
-							<?php
-							if ( end( $attribute_keys ) === $attribute_name ) {
-								echo wp_kses_post( apply_filters( 'woocommerce_reset_variations_link',
-									'<a class="reset_variations" href="#" aria-label="' . esc_attr__( 'Clear options', 'woocommerce' ) . '">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>'
-								) );
+				<?php if ( $is_couleurs ) : ?>
+					<div class="wwb-color-swatches" data-config-group="couleurs">
+						<?php $is_first = true; foreach ( $options as $option ) :
+							$term = get_term_by( 'slug', $option, 'pa_couleurs' );
+							$color = $term && function_exists( 'get_field' )
+								? get_field( 'product_color_pick', 'pa_couleurs_' . $term->term_id )
+								: '#ccc';
+							if ( empty( $color ) ) $color = '#ccc';
+							$name = $term ? $term->name : $option;
+						?>
+							<button type="button"
+								class="wwb-color-swatches__swatch<?php echo $is_first ? ' is-active selected' : ''; ?>"
+								data-value="<?php echo esc_attr( $option ); ?>"
+								data-label="<?php echo esc_attr( $name ); ?>"
+								style="background-color: <?php echo esc_attr( $color ); ?>;"
+								title="<?php echo esc_attr( $name ); ?>"
+								aria-label="<?php echo esc_attr( $name ); ?>"
+								aria-pressed="<?php echo $is_first ? 'true' : 'false'; ?>"></button>
+						<?php $is_first = false; endforeach; ?>
+					</div>
+				<?php else : ?>
+					<div class="wwb-attribute-swatches">
+						<?php foreach ( $options as $option ) :
+							$term = get_term_by( 'slug', $option, $attribute_name );
+							$label = $term ? $term->name : $option;
+							if ( strpos( $attribute_name, 'dimension' ) !== false ) {
+								if ( strpos( $label, 'x' ) === false && is_numeric( trim( str_replace( array( 'cm', ' ' ), '', $label ) ) ) ) {
+									$dim = trim( str_replace( array( 'cm', ' ' ), '', $label ) );
+									$label = $dim . 'x' . $dim . ' cm';
+								} elseif ( strpos( $label, 'cm' ) === false && strpos( $label, 'x' ) !== false ) {
+									$label .= ' cm';
+								}
 							}
-							?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
+						?>
+							<button type="button"
+								class="wwb-attribute-swatches__swatch"
+								data-value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $label ); ?></button>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+
+				<select id="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"
+					name="attribute_<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"
+					class="wwb-hidden-select" aria-hidden="true">
+					<option value=""><?php esc_html_e( 'Choose an option', 'woocommerce' ); ?></option>
+					<?php foreach ( $options as $option ) :
+						$term = get_term_by( 'slug', $option, $attribute_name );
+					?>
+						<option value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $term ? $term->name : $option ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+		<?php $step++; endforeach; ?>
 
 		<div class="reset_variations_alert screen-reader-text" role="alert" aria-live="polite" aria-relevant="all"></div>
 		<?php do_action( 'woocommerce_after_variations_table' ); ?>
