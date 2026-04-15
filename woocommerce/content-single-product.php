@@ -72,17 +72,29 @@ $attributes = $product->get_attributes();
 
 			<?php
 			// Base price "À partir de" (shown before any variation selected)
-			$base_price = 0;
+			$base_price    = 0;
+			$regular_price = 0;
 			if ( $product->is_type( 'variable' ) ) {
-				$base_price = (float) $product->get_variation_price( 'min', true );
+				$base_price    = (float) $product->get_variation_price( 'min', true );
+				$regular_price = (float) $product->get_variation_regular_price( 'min', true );
 			} else {
-				$base_price = (float) $product->get_price();
+				$base_price    = (float) $product->get_price();
+				$regular_price = (float) $product->get_regular_price();
 			}
+			$is_on_sale     = $regular_price > 0 && $regular_price > $base_price;
+			$discount_pct   = $is_on_sale ? round( ( ( $regular_price - $base_price ) / $regular_price ) * 100 ) : 0;
 			?>
 			<?php if ( $base_price > 0 ) : ?>
-				<div class="wwb-single__price wwb-single__price--from">
+				<div class="wwb-single__price wwb-single__price--from<?php echo $is_on_sale ? ' is-sale' : ''; ?>">
 					<span class="wwb-single__price-label">À partir de</span>
-					<span class="wwb-single__price-amount"><?php echo wc_price( $base_price ); ?> <small>TTC</small></span>
+					<span class="wwb-single__price-amount">
+						<?php echo wc_price( $base_price ); ?>
+						<?php if ( $is_on_sale ) : ?>
+							<del class="wwb-single__price-old"><?php echo wc_price( $regular_price ); ?></del>
+							<span class="wwb-single__price-tag">-<?php echo esc_html( $discount_pct ); ?>%</span>
+						<?php endif; ?>
+						<small>TTC</small>
+					</span>
 					<span class="wwb-single__price-info">Livraison calculée au panier · Prix usine sans intermédiaire</span>
 				</div>
 			<?php endif; ?>

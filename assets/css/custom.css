@@ -3952,6 +3952,43 @@ body.woocommerce-checkout footer.wp-block-template-part {
 	margin-top: 4px;
 }
 
+.wwb-single__price--from.is-sale .wwb-single__price-amount {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.wwb-single__price--from.is-sale .wwb-single__price-amount > .woocommerce-Price-amount {
+	color: var(--wp--preset--color--primary-dark);
+}
+
+.wwb-single__price-old {
+	font-size: 18px;
+	font-weight: 500;
+	color: var(--wp--preset--color--muted);
+	text-decoration: line-through;
+	opacity: 1;
+}
+
+.wwb-single__price-old .woocommerce-Price-amount {
+	color: inherit;
+	font-weight: inherit;
+}
+
+.wwb-single__price-tag {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 10px;
+	background: var(--wp--preset--color--primary);
+	color: #FFFFFF;
+	border-radius: 999px;
+	font-family: 'Inter', sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1;
+}
+
 /* CTA buttons */
 .wwb-single__cta {
 	display: flex;
