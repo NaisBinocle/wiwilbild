@@ -59,7 +59,7 @@ function wwb_v2_enqueue_assets() {
 
     // WooCommerce CSS (uniquement sur les pages WC)
     if ( class_exists( 'WooCommerce' ) ) {
-        wp_enqueue_style( 'wwb-v2-woocommerce', $theme_uri . '/assets/css/woocommerce.css', array(), $version );
+        wp_enqueue_style( 'wwb-v2-woocommerce', $theme_uri . '/assets/css/woocommerce.css', array(), $version . '-' . filemtime( $theme_dir . '/assets/css/woocommerce.css' ) );
     }
 
     // V3 Homepage CSS (page-home-v2 template only)
@@ -82,7 +82,7 @@ function wwb_v2_enqueue_assets() {
         // Calculator only for carrelage products
         global $post;
         if ( $post && has_term( 'carrelage', 'product_cat', $post->ID ) ) {
-            wp_enqueue_script( 'wwb-v2-calculator', $theme_uri . '/assets/js/calculator.js', array(), $version, true );
+            wp_enqueue_script( 'wwb-v2-calculator', $theme_uri . '/assets/js/calculator.js', array( 'jquery' ), $version . '-' . filemtime( $theme_dir . '/assets/js/calculator.js' ), true );
         }
     }
 }
@@ -142,6 +142,7 @@ require_once get_template_directory() . '/inc/wwb-header.php';
 // ─────────────────────────────────────────────
 if ( is_admin() ) {
     require_once get_template_directory() . '/inc/wwb-setup-products.php';
+    require_once get_template_directory() . '/inc/wwb-setup-carrelage-test.php';
 }
 
 // ─────────────────────────────────────────────

@@ -350,46 +350,67 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 		<?php do_action( 'woocommerce_after_variations_table' ); ?>
 
 		<?php
-		// Surface calculator — carrelage only
-		$length = 0; $width = 0; $surface_unitaire = 0;
-		if ( $product->is_type( 'variable' ) ) {
-			$variations = $product->get_available_variations();
-			if ( ! empty( $variations ) ) {
-				$length = (float) ( $variations[0]['dimensions']['length'] ?? 0 );
-				$width  = (float) ( $variations[0]['dimensions']['width'] ?? 0 );
-			}
-		} else {
+		// ── Calculateur surface carrelage ──
+		$surface_par_boite = (float) $product->get_meta( '_wwb_surface_par_boite' );
+		$pieces_par_boite  = (int) $product->get_meta( '_wwb_pieces_par_boite' );
+
+		if ( ! $surface_par_boite ) {
 			$length = (float) $product->get_length();
 			$width  = (float) $product->get_width();
+			if ( ( ! $length || ! $width ) && $product->is_type( 'variable' ) ) {
+				$variations = $product->get_available_variations();
+				if ( ! empty( $variations ) ) {
+					$length = (float) ( $variations[0]['dimensions']['length'] ?? 0 );
+					$width  = (float) ( $variations[0]['dimensions']['width'] ?? 0 );
+				}
+			}
+			if ( $length && $width ) {
+				$surface_unitaire  = ( $length / 100 ) * ( $width / 100 );
+				$surface_par_boite = $surface_unitaire * max( 1, $pieces_par_boite ?: 12 );
+			}
 		}
-		if ( $length && $width ) {
-			$surface_unitaire = ( $length / 100 ) * ( $width / 100 );
-		}
+
+		$price_per_m2 = (float) $product->get_price();
 		?>
-		<div id="surface-calculator" class="wwb-surface-calc" data-surface-unitaire="<?php echo esc_attr( $surface_unitaire ); ?>">
-			<h4 class="wwb-surface-calc__title">Calculez votre surface</h4>
-			<div class="wwb-surface-calc__input-group">
-				<label for="surface-input">Surface souhaitée</label>
-				<div style="display:flex;align-items:center;gap:8px;">
-					<input type="number" id="surface-input" class="wwb-surface-calc__input" min="0" step="0.1" placeholder="m²" value="">
-					<span>m²</span>
-				</div>
+		<div class="wwb-calc"
+			data-surface-par-boite="<?php echo esc_attr( number_format( $surface_par_boite, 4, '.', '' ) ); ?>"
+			data-pieces-par-boite="<?php echo esc_attr( $pieces_par_boite ); ?>"
+			data-price-m2="<?php echo esc_attr( $price_per_m2 ); ?>">
+			<div class="wwb-calc__head">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+				<span>Calculez votre surface</span>
 			</div>
-			<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--wp--preset--color--body);margin:8px 0 16px;">
-				<input type="checkbox" id="add-margin"> Ajouter 10% de marge (coupes)
+
+			<div class="wwb-calc__inputs">
+				<label class="wwb-calc__field">
+					<span class="wwb-calc__field-label">Surface</span>
+					<span class="wwb-calc__field-row">
+						<input type="number" min="0" step="0.1" value="25" class="wwb-calc__input" data-wwb-calc="m2" inputmode="decimal">
+						<span class="wwb-calc__unit">m²</span>
+					</span>
+				</label>
+				<label class="wwb-calc__field">
+					<span class="wwb-calc__field-label">Quantité</span>
+					<span class="wwb-calc__field-row">
+						<input type="number" min="1" step="1" value="1" class="wwb-calc__input" data-wwb-calc="boxes" inputmode="numeric">
+						<span class="wwb-calc__unit">boîtes</span>
+					</span>
+				</label>
+			</div>
+
+			<label class="wwb-calc__margin">
+				<input type="checkbox" data-wwb-calc="margin" checked>
+				<span class="wwb-calc__margin-box" aria-hidden="true">
+					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+				</span>
+				<span>Majorer de 10 % pour les chutes de découpe</span>
 			</label>
-			<div class="wwb-surface-calc__input-group">
-				<label for="box-quantity">Quantité boîte(s)</label>
-				<div class="wwb-qty">
-					<button type="button" class="wwb-qty__btn wwb-qty__btn--minus">−</button>
-					<input type="number" id="box-quantity" class="wwb-qty__input" min="1" value="1" readonly>
-					<button type="button" class="wwb-qty__btn wwb-qty__btn--plus">+</button>
-				</div>
+
+			<div class="wwb-calc__total">
+				<span class="wwb-calc__total-label">Total estimé</span>
+				<span class="wwb-calc__total-value" data-wwb-calc="total">—</span>
 			</div>
-			<div class="wwb-surface-calc__result">
-				<p><strong><span id="surface-result">0</span> m²</strong> couverts avec <strong><span id="box-count">1</span></strong> boîte(s)</p>
-				<p style="font-size:12px;color:var(--wp--preset--color--muted);">Surface par boîte : <span id="surface-per-box"><?php echo number_format( $surface_unitaire, 2, ',', '' ); ?></span> m²</p>
-			</div>
+			<p class="wwb-calc__hint" data-wwb-calc="hint"></p>
 		</div>
 
 		<div class="single_variation_wrap">
@@ -399,6 +420,13 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			do_action( 'woocommerce_after_single_variation' );
 			?>
 		</div>
+
+		<!-- Encart "Visualisez grâce à l'IA" → toujours vers création de compte -->
+		<a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" class="wwb-ai-teaser">
+			<svg class="wwb-ai-teaser__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/><path d="M19 14l.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7.7-2.1z"/></svg>
+			<span class="wwb-ai-teaser__text">Visualisez ce carrelage chez vous grâce à l'IA</span>
+			<span class="wwb-ai-teaser__cta">Essayer →</span>
+		</a>
 
 	<?php endif; ?>
 

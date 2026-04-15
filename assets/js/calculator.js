@@ -1,106 +1,116 @@
 /**
- * WWB V2 — Surface Calculator (Carrelage)
- * Vanilla JS — No jQuery dependency
+ * WWB V2 — Calculateur surface carrelage (vanilla JS).
+ * Lie surface (m²) ↔ quantité (boîtes) + majoration 10% + total estimé + sync WC qty.
  */
-document.addEventListener('DOMContentLoaded', function () {
-	var calculator = document.getElementById('surface-calculator');
-	if (!calculator) return;
+(function () {
+	'use strict';
 
-	var surfaceUnitaire = parseFloat(calculator.dataset.surfaceUnitaire) || 0;
+	var calc = document.querySelector('.wwb-calc');
+	if (!calc) return;
 
-	var surfaceInput = document.getElementById('surface-input');
-	var addMargin = document.getElementById('add-margin');
-	var boxQuantity = document.getElementById('box-quantity');
-	var surfacePerBox = document.getElementById('surface-per-box');
-	var surfaceResult = document.getElementById('surface-result');
-	var boxCount = document.getElementById('box-count');
-	var btnPlus = calculator.querySelector('.wwb-qty__btn--plus');
-	var btnMinus = calculator.querySelector('.wwb-qty__btn--minus');
+	var surfaceParBoite = parseFloat(calc.dataset.surfaceParBoite) || 0;
+	var priceM2         = parseFloat(calc.dataset.priceM2) || 0;
 
-	function updateSurfaceUnitaire(variation) {
-		var length = parseFloat(variation?.dimensions?.length || 0);
-		var width = parseFloat(variation?.dimensions?.width || 0);
-		if (length > 0 && width > 0) {
-			surfaceUnitaire = (length / 100) * (width / 100);
-			calculator.dataset.surfaceUnitaire = surfaceUnitaire;
-			if (surfacePerBox) {
-				surfacePerBox.textContent = surfaceUnitaire.toFixed(2).replace('.', ',');
-			}
-		}
+	var inputM2    = calc.querySelector('[data-wwb-calc="m2"]');
+	var inputBoxes = calc.querySelector('[data-wwb-calc="boxes"]');
+	var margin     = calc.querySelector('[data-wwb-calc="margin"]');
+	var totalEl    = calc.querySelector('[data-wwb-calc="total"]');
+	var hintEl     = calc.querySelector('[data-wwb-calc="hint"]');
+
+	var isSyncing = false;
+
+	function formatEUR(val) {
+		return (Math.round(val * 100) / 100)
+			.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
 	}
 
-	function calculateBoxesFromSurface() {
-		var surface = parseFloat(surfaceInput.value) || 0;
-		if (addMargin && addMargin.checked) {
-			surface = surface * 1.10;
-		}
-		if (surface > 0 && surfaceUnitaire > 0) {
-			var boxes = Math.ceil(surface / surfaceUnitaire);
-			boxQuantity.value = boxes;
-			updateResults();
-		}
+	function formatNum(val, dec) {
+		return (Math.round(val * Math.pow(10, dec)) / Math.pow(10, dec))
+			.toLocaleString('fr-FR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
 	}
 
-	function updateResults() {
-		var boxes = parseInt(boxQuantity.value) || 1;
-		var totalSurface = (boxes * surfaceUnitaire).toFixed(2);
-
-		if (surfaceResult) surfaceResult.textContent = totalSurface.replace('.', ',');
-		if (boxCount) boxCount.textContent = boxes;
-
-		// Sync WooCommerce quantity
-		var wcQty = document.querySelector('.input-text.qty');
+	function syncWcQty(boxes) {
+		var wcQty = document.querySelector('.woocommerce-variation-add-to-cart .input-text.qty, form.cart .input-text.qty');
 		if (wcQty) {
 			wcQty.value = boxes;
 			wcQty.dispatchEvent(new Event('change', { bubbles: true }));
 		}
 	}
 
-	// Events
-	if (surfaceInput) {
-		surfaceInput.addEventListener('input', calculateBoxesFromSurface);
+	function render(boxes, surfaceCible) {
+		if (!surfaceParBoite) {
+			totalEl.textContent = '—';
+			hintEl.textContent  = 'Dimensions du produit non renseignées.';
+			return;
+		}
+		var surfaceCouverte = boxes * surfaceParBoite;
+		var total = surfaceCouverte * priceM2;
+		totalEl.textContent = formatEUR(total);
+		hintEl.textContent  =
+			boxes + ' boîte' + (boxes > 1 ? 's' : '') +
+			' · ' + formatNum(surfaceCouverte, 2) + ' m² couverts' +
+			' · ' + formatEUR(priceM2) + ' / m²';
+		syncWcQty(boxes);
 	}
 
-	if (addMargin) {
-		addMargin.addEventListener('change', calculateBoxesFromSurface);
+	function fromSurface() {
+		if (isSyncing) return;
+		var m2 = parseFloat(inputM2.value) || 0;
+		if (margin.checked) m2 *= 1.10;
+		var boxes = surfaceParBoite > 0 ? Math.max(1, Math.ceil(m2 / surfaceParBoite)) : 1;
+		isSyncing = true;
+		inputBoxes.value = boxes;
+		isSyncing = false;
+		render(boxes);
 	}
 
-	if (btnPlus) {
-		btnPlus.addEventListener('click', function () {
-			var current = parseInt(boxQuantity.value) || 1;
-			boxQuantity.value = current + 1;
-			if (surfaceInput) surfaceInput.value = '';
-			updateResults();
+	function fromBoxes() {
+		if (isSyncing) return;
+		var boxes = parseInt(inputBoxes.value, 10) || 1;
+		if (boxes < 1) boxes = 1;
+		isSyncing = true;
+		inputBoxes.value = boxes;
+		var raw = boxes * surfaceParBoite;
+		// Afficher la surface brute sans majoration, mais ne pas écraser si user a saisi avec majoration active
+		inputM2.value = formatNum(margin.checked ? raw / 1.10 : raw, 1).replace(/\s/g, '').replace(',', '.');
+		isSyncing = false;
+		render(boxes);
+	}
+
+	inputM2.addEventListener('input', fromSurface);
+	inputBoxes.addEventListener('input', fromBoxes);
+	margin.addEventListener('change', fromSurface);
+
+	// WooCommerce variation change → recalibrer surface/boîte depuis dimensions variation
+	function updateFromVariation(variation) {
+		if (!variation || !variation.dimensions) return;
+		var length = parseFloat(variation.dimensions.length) || 0;
+		var width  = parseFloat(variation.dimensions.width)  || 0;
+		if (length > 0 && width > 0) {
+			var pieces   = parseInt(calc.dataset.piecesParBoite, 10) || 12;
+			var unitaire = (length / 100) * (width / 100);
+			surfaceParBoite = unitaire * pieces;
+			calc.dataset.surfaceParBoite = surfaceParBoite;
+		}
+		if (variation.display_price) {
+			priceM2 = parseFloat(variation.display_price);
+			calc.dataset.priceM2 = priceM2;
+		}
+		fromSurface();
+	}
+
+	var form = document.querySelector('form.variations_form');
+	if (form) {
+		form.addEventListener('found_variation', function (e) {
+			updateFromVariation((e.detail && e.detail.variation) || e.detail);
 		});
 	}
-
-	if (btnMinus) {
-		btnMinus.addEventListener('click', function () {
-			var current = parseInt(boxQuantity.value) || 1;
-			if (current > 1) {
-				boxQuantity.value = current - 1;
-				if (surfaceInput) surfaceInput.value = '';
-				updateResults();
-			}
-		});
-	}
-
-	// WooCommerce variation change
-	var variationsForm = document.querySelector('form.variations_form');
-	if (variationsForm) {
-		variationsForm.addEventListener('found_variation', function (e) {
-			updateSurfaceUnitaire(e.detail || e.originalEvent?.detail);
-			updateResults();
-		});
-	}
-
-	// jQuery bridge for WooCommerce events (WC uses jQuery internally)
 	if (window.jQuery) {
 		jQuery('form.variations_form').on('found_variation', function (event, variation) {
-			updateSurfaceUnitaire(variation);
-			updateResults();
+			updateFromVariation(variation);
 		});
 	}
 
-	updateResults();
-});
+	// Initial render
+	fromSurface();
+})();
