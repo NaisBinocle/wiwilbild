@@ -266,7 +266,7 @@ function wwb_header_mega_carrelage() {
                 </a>
             </div>
             <div class="wwb-mega__grid wwb-mega__grid--cols-3">
-                <a class="wwb-mega__card wwb-mega__card--active" href="<?php echo esc_url( $home . 'categorie-produit/carrelage/' ); ?>">
+                <a class="wwb-mega__card" href="<?php echo esc_url( $home . 'categorie-produit/carrelage/' ); ?>">
                     <span class="wwb-mega__card-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
                     </span>

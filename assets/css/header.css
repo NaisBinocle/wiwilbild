@@ -407,15 +407,6 @@ body .wwb-header * {
 .wwb-mega__grid--cols-3 {
     grid-template-columns: repeat(3, 1fr);
 }
-.wwb-mega__card--active {
-    background: #F4F1F9;
-    border-color: var(--wwb-hd-secondary);
-    box-shadow: inset 0 0 0 1px var(--wwb-hd-secondary);
-}
-.wwb-mega__card--active .wwb-mega__card-icon {
-    background: var(--wwb-hd-secondary);
-    color: #fff;
-}
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 1024px) {
