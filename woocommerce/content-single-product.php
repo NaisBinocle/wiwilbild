@@ -120,70 +120,115 @@ $attributes = $product->get_attributes();
 		</div><!-- .wwb-single__details -->
 	</div><!-- .wwb-single__hero -->
 
-	<!-- Caractéristiques techniques -->
-	<section class="wwb-single__specs">
-		<h2>Caractéristiques techniques</h2>
-		<div class="wwb-single__specs-grid">
-			<?php
-			$specs_left  = array();
-			$specs_right = array();
+	<?php $is_carrelage = has_term( 'carrelage', 'product_cat', $product->get_id() ); ?>
 
-			if ( ! empty( $attributes ) ) {
-				$i = 0;
-				foreach ( $attributes as $attr ) {
-					$name  = wc_attribute_label( $attr->get_name() );
-					$value = $product->get_attribute( $attr->get_name() );
-					if ( $value ) {
-						// Skip variation attributes (taille, vitrage, couleurs) — they're in the configurator
-						$attr_slug = strtolower( $attr->get_name() );
-						if ( strpos( $attr_slug, 'taille' ) !== false
-							|| strpos( $attr_slug, 'vitrage' ) !== false
-							|| strpos( $attr_slug, 'couleur' ) !== false
-							|| strpos( $attr_slug, 'dimension' ) !== false ) {
-							continue;
+	<?php if ( $is_carrelage ) : ?>
+
+		<!-- Où poser ce carrelage ? -->
+		<section class="wwb-carrelage-usages">
+			<div class="wwb-carrelage-usages__inner">
+				<h2>Où poser ce carrelage ?</h2>
+				<p class="wwb-carrelage-usages__sub">Posable en sol et mural — compatible plancher chauffant.</p>
+				<div class="wwb-carrelage-usages__grid">
+					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🛁</span><strong>Salle de bain</strong><span>WC, douche, receveur</span></div>
+					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🍳</span><strong>Cuisine</strong><span>Sol et crédence</span></div>
+					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🛋️</span><strong>Salon & SAM</strong><span>Pièces à vivre</span></div>
+					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🚪</span><strong>Entrée & couloir</strong><span>Zones de passage</span></div>
+					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🔥</span><strong>Plancher chauffant</strong><span>Compatible basse T°</span></div>
+					<div class="wwb-carrelage-usages__item"><span class="wwb-carrelage-usages__icon">🏠</span><strong>Chambre</strong><span>Rendu chaleureux</span></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Questions fréquentes carrelage -->
+		<section class="wwb-carrelage-qr">
+			<h2>Questions fréquentes</h2>
+			<div class="wwb-carrelage-qr__list">
+				<details class="wwb-carrelage-qr__item" open>
+					<summary>Quelle colle utiliser pour ce carrelage ?</summary>
+					<p>Une colle <strong>C2S1 flex</strong> est recommandée pour une pose en intérieur sur chape, dalle béton ou ancien carrelage. Comptez environ 5 kg de colle par m².</p>
+				</details>
+				<details class="wwb-carrelage-qr__item">
+					<summary>Quelle largeur de joint pour un rendu authentique ?</summary>
+					<p>Pour un effet carreau de ciment fidèle, un <strong>joint fin de 2 à 3 mm</strong> en ton beige ou gris clair met en valeur le motif sans l'écraser.</p>
+				</details>
+				<details class="wwb-carrelage-qr__item">
+					<summary>Peut-on le poser sur un ancien carrelage ?</summary>
+					<p>Oui, à condition que le support soit sain, plan, non décollé et parfaitement nettoyé. Utilisez un primaire d'accrochage adapté avant l'encollage.</p>
+				</details>
+				<details class="wwb-carrelage-qr__item">
+					<summary>Existe-t-il des plinthes assorties ?</summary>
+					<p>Nous proposons des plinthes droites en grès cérame coordonnées sur la plupart des séries. Contactez-nous pour connaître la disponibilité.</p>
+				</details>
+			</div>
+		</section>
+
+	<?php else : ?>
+
+		<!-- Caractéristiques techniques -->
+		<section class="wwb-single__specs">
+			<h2>Caractéristiques techniques</h2>
+			<div class="wwb-single__specs-grid">
+				<?php
+				$specs_left  = array();
+				$specs_right = array();
+
+				if ( ! empty( $attributes ) ) {
+					$i = 0;
+					foreach ( $attributes as $attr ) {
+						$name  = wc_attribute_label( $attr->get_name() );
+						$value = $product->get_attribute( $attr->get_name() );
+						if ( $value ) {
+							$attr_slug = strtolower( $attr->get_name() );
+							if ( strpos( $attr_slug, 'taille' ) !== false
+								|| strpos( $attr_slug, 'vitrage' ) !== false
+								|| strpos( $attr_slug, 'couleur' ) !== false
+								|| strpos( $attr_slug, 'dimension' ) !== false ) {
+								continue;
+							}
+							if ( $i % 2 === 0 ) {
+								$specs_left[] = array( 'label' => $name, 'value' => $value );
+							} else {
+								$specs_right[] = array( 'label' => $name, 'value' => $value );
+							}
+							$i++;
 						}
-						if ( $i % 2 === 0 ) {
-							$specs_left[] = array( 'label' => $name, 'value' => $value );
-						} else {
-							$specs_right[] = array( 'label' => $name, 'value' => $value );
-						}
-						$i++;
 					}
 				}
-			}
 
-			// Fallback static specs if no attributes
-			if ( empty( $specs_left ) && empty( $specs_right ) ) {
-				$specs_left = array(
-					array( 'label' => 'Coefficient Uw', 'value' => '1.3 W/m²K' ),
-					array( 'label' => 'Classement AEV', 'value' => 'A*4 E*7B V*A2' ),
-					array( 'label' => "Type d'ouverture", 'value' => 'Oscillo-battante' ),
-				);
-				$specs_right = array(
-					array( 'label' => 'Nombre de vantaux', 'value' => '1 vantail' ),
-					array( 'label' => 'Épaisseur dormant', 'value' => '70 mm' ),
-					array( 'label' => 'Origine', 'value' => 'Fabrication Pologne' ),
-				);
-			}
-			?>
-			<div class="wwb-single__specs-col">
-				<?php foreach ( $specs_left as $spec ) : ?>
-					<div class="wwb-single__specs-row">
-						<span class="wwb-single__specs-label"><?php echo esc_html( $spec['label'] ); ?></span>
-						<span class="wwb-single__specs-value"><?php echo esc_html( $spec['value'] ); ?></span>
-					</div>
-				<?php endforeach; ?>
+				if ( empty( $specs_left ) && empty( $specs_right ) ) {
+					$specs_left = array(
+						array( 'label' => 'Coefficient Uw', 'value' => '1.3 W/m²K' ),
+						array( 'label' => 'Classement AEV', 'value' => 'A*4 E*7B V*A2' ),
+						array( 'label' => "Type d'ouverture", 'value' => 'Oscillo-battante' ),
+					);
+					$specs_right = array(
+						array( 'label' => 'Nombre de vantaux', 'value' => '1 vantail' ),
+						array( 'label' => 'Épaisseur dormant', 'value' => '70 mm' ),
+						array( 'label' => 'Origine', 'value' => 'Fabrication Pologne' ),
+					);
+				}
+				?>
+				<div class="wwb-single__specs-col">
+					<?php foreach ( $specs_left as $spec ) : ?>
+						<div class="wwb-single__specs-row">
+							<span class="wwb-single__specs-label"><?php echo esc_html( $spec['label'] ); ?></span>
+							<span class="wwb-single__specs-value"><?php echo esc_html( $spec['value'] ); ?></span>
+						</div>
+					<?php endforeach; ?>
+				</div>
+				<div class="wwb-single__specs-col">
+					<?php foreach ( $specs_right as $spec ) : ?>
+						<div class="wwb-single__specs-row">
+							<span class="wwb-single__specs-label"><?php echo esc_html( $spec['label'] ); ?></span>
+							<span class="wwb-single__specs-value"><?php echo esc_html( $spec['value'] ); ?></span>
+						</div>
+					<?php endforeach; ?>
+				</div>
 			</div>
-			<div class="wwb-single__specs-col">
-				<?php foreach ( $specs_right as $spec ) : ?>
-					<div class="wwb-single__specs-row">
-						<span class="wwb-single__specs-label"><?php echo esc_html( $spec['label'] ); ?></span>
-						<span class="wwb-single__specs-value"><?php echo esc_html( $spec['value'] ); ?></span>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</section>
+		</section>
+
+	<?php endif; ?>
 
 	<!-- Avis clients -->
 	<?php

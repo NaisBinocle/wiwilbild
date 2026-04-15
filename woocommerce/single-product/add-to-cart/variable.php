@@ -350,6 +350,44 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 		<?php do_action( 'woocommerce_after_variations_table' ); ?>
 
 		<?php
+		// ── Fiche technique carrelage (meta + dimensions) ──
+		$length = (float) $product->get_length();
+		$width  = (float) $product->get_width();
+		if ( ! $length || ! $width ) {
+			$vs = $product->is_type( 'variable' ) ? $product->get_available_variations() : array();
+			if ( ! empty( $vs ) ) {
+				$length = (float) ( $vs[0]['dimensions']['length'] ?? 0 );
+				$width  = (float) ( $vs[0]['dimensions']['width']  ?? 0 );
+			}
+		}
+		$format_str = ( $length && $width )
+			? number_format( $length, 2, ',', '' ) . ' × ' . number_format( $width, 2, ',', '' ) . ' cm'
+			: '';
+		$matiere    = $product->get_meta( '_wwb_matiere' );
+		$epaisseur  = $product->get_meta( '_wwb_epaisseur' );
+		$finition   = $product->get_meta( '_wwb_finition' );
+		$resistance = $product->get_meta( '_wwb_resistance' );
+		$usages     = $product->get_meta( '_wwb_usages' );
+		$specs_rows = array_filter( array(
+			$format_str ? array( 'Format',     $format_str ) : null,
+			( $matiere || $epaisseur ) ? array( 'Matière', trim( $matiere . ( $epaisseur ? ' · ' . $epaisseur : '' ) ) ) : null,
+			$finition   ? array( 'Finition',   $finition )   : null,
+			$resistance ? array( 'Résistance', $resistance ) : null,
+			$usages     ? array( 'Usages',     $usages )     : null,
+		) );
+		?>
+		<?php if ( ! empty( $specs_rows ) ) : ?>
+		<div class="wwb-carrelage-specs">
+			<?php foreach ( $specs_rows as $row ) : ?>
+				<div class="wwb-carrelage-specs__row">
+					<span class="wwb-carrelage-specs__label"><?php echo esc_html( $row[0] ); ?></span>
+					<span class="wwb-carrelage-specs__value"><?php echo esc_html( $row[1] ); ?></span>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<?php endif; ?>
+
+		<?php
 		// ── Calculateur surface carrelage ──
 		$surface_par_boite = (float) $product->get_meta( '_wwb_surface_par_boite' );
 		$pieces_par_boite  = (int) $product->get_meta( '_wwb_pieces_par_boite' );
