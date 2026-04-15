@@ -337,6 +337,91 @@ ul.products.columns-4::after {
 	color: var(--wp--preset--color--body);
 }
 
+/* ─── Badge "Promo !" WooCommerce — restyle ─── */
+.wwb-single .onsale,
+.woocommerce span.onsale {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+	right: auto;
+	background: var(--wp--preset--color--primary);
+	color: #FFFFFF;
+	font-family: 'Inter', system-ui, sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	padding: 6px 12px;
+	border-radius: 999px;
+	min-height: auto;
+	min-width: auto;
+	width: auto;
+	height: auto;
+	line-height: 1.2;
+	box-shadow: 0 4px 12px rgba(255, 153, 218, 0.35);
+	z-index: 2;
+	margin: 0;
+}
+
+/* ─── Prix variation sélectionnée (WC natif) ─── */
+.woocommerce-variation-price {
+	margin: 0 0 16px;
+	font-size: 14px;
+	color: var(--wp--preset--color--body);
+}
+
+.woocommerce-variation-price .price {
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+	flex-wrap: wrap;
+	font-family: 'Playfair Display', Georgia, serif;
+}
+
+.woocommerce-variation-price .price ins {
+	background: transparent;
+	text-decoration: none;
+	font-size: 24px;
+	font-weight: 700;
+	color: var(--wp--preset--color--primary-dark);
+}
+
+.woocommerce-variation-price .price del {
+	text-decoration: line-through;
+	font-size: 15px;
+	color: var(--wp--preset--color--muted);
+	font-weight: 500;
+	opacity: 1;
+}
+
+.woocommerce-variation-price .price del .amount {
+	color: inherit;
+}
+
+.woocommerce-variation-availability,
+.woocommerce-variation-description {
+	font-family: 'Inter', system-ui, sans-serif;
+	font-size: 13px;
+	color: var(--wp--preset--color--body);
+	margin: 6px 0 0;
+}
+
+.woocommerce-variation-availability .stock {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 600;
+}
+
+.woocommerce-variation-availability .in-stock {
+	color: #2E8B57;
+}
+
+.woocommerce-variation-availability .in-stock::before {
+	content: '●';
+	font-size: 10px;
+}
+
 /* ─── Fiche technique carrelage (specs table) ─── */
 .wwb-carrelage-specs {
 	display: flex;

@@ -28,6 +28,8 @@
 table.variations td.value select.wwb-hidden-select,
 select.wwb-hidden-select {
 	position: absolute !important;
+	left: -9999px !important;
+	top: auto !important;
 	width: 1px !important;
 	height: 1px !important;
 	padding: 0 !important;
@@ -37,6 +39,7 @@ select.wwb-hidden-select {
 	white-space: nowrap !important;
 	border: 0 !important;
 	opacity: 0 !important;
+	pointer-events: none !important;
 }
 
 /* ─── Section Label (eyebrow) ─── */

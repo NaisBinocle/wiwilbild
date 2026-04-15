@@ -52,7 +52,7 @@ function wwb_v2_enqueue_assets() {
     $version   = wp_get_theme()->get( 'Version' );
 
     // CSS global
-    wp_enqueue_style( 'wwb-v2-custom', $theme_uri . '/assets/css/custom.css', array(), $version );
+    wp_enqueue_style( 'wwb-v2-custom', $theme_uri . '/assets/css/custom.css', array(), $version . '-' . filemtime( $theme_dir . '/assets/css/custom.css' ) );
 
     // Header custom (site-wide)
     wp_enqueue_style( 'wwb-v2-header', $theme_uri . '/assets/css/header.css', array( 'wwb-v2-custom' ), $version );
