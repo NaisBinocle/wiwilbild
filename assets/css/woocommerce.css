@@ -282,16 +282,16 @@ ul.products.columns-4::after {
 .wwb-carrelage-desc__body p:last-child { margin-bottom: 0; }
 
 .wwb-carrelage-desc__col--usages {
-	background: var(--wp--preset--color--surface);
+	background: #F8F7FC;
 	border-radius: 14px;
 	padding: 28px;
 }
 
 .wwb-carrelage-desc__col--usages h3 {
 	font-family: 'Inter', system-ui, sans-serif;
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 700;
-	color: var(--wp--preset--color--primary-dark);
+	color: #362C49;
 	margin: 0 0 18px;
 }
 
@@ -306,32 +306,37 @@ ul.products.columns-4::after {
 
 .wwb-carrelage-desc__usages li {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	gap: 12px;
 }
 
-.wwb-carrelage-desc__usages li > span {
-	font-size: 20px;
+.wwb-carrelage-desc__icon {
+	color: #7B74D0;
 	flex-shrink: 0;
-	line-height: 1.2;
 }
 
 .wwb-carrelage-desc__usages li > div {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
+	gap: 1px;
 }
 
 .wwb-carrelage-desc__usages strong {
 	font-size: 13px;
-	color: var(--wp--preset--color--primary-dark);
-	font-weight: 600;
+	color: #5A5670;
+	font-weight: 500;
+	letter-spacing: 0;
 }
 
 .wwb-carrelage-desc__usages em {
-	font-size: 12px;
-	color: var(--wp--preset--color--muted);
+	font-size: 11px;
+	color: #9490A6;
 	font-style: normal;
+}
+
+.wwb-carrelage-desc__usages li.is-highlight strong {
+	color: #362C49;
+	font-weight: 700;
 }
 
 @media (max-width: 768px) {

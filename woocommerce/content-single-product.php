@@ -160,12 +160,26 @@ $attributes = $product->get_attributes();
 			<aside class="wwb-carrelage-desc__col wwb-carrelage-desc__col--usages">
 				<h3>Où poser ce carrelage ?</h3>
 				<ul class="wwb-carrelage-desc__usages">
-					<li><span>🛁</span><div><strong>Salle de bain</strong><em>WC, douche, receveur</em></div></li>
-					<li><span>🍳</span><div><strong>Cuisine</strong><em>Sol et crédence</em></div></li>
-					<li><span>🛋️</span><div><strong>Salon & SAM</strong><em>Pièces à vivre</em></div></li>
-					<li><span>🚪</span><div><strong>Entrée & couloir</strong><em>Zones de passage</em></div></li>
-					<li><span>🔥</span><div><strong>Plancher chauffant</strong><em>Compatible basse T°</em></div></li>
-					<li><span>🏠</span><div><strong>Chambre</strong><em>Rendu chaleureux</em></div></li>
+					<li>
+						<svg class="wwb-carrelage-desc__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="10" y1="5" x2="8" y2="7"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="7" y1="19" x2="7" y2="21"/><line x1="17" y1="19" x2="17" y2="21"/></svg>
+						<div><strong>Salle de bain</strong><em>WC, douche, receveur</em></div>
+					</li>
+					<li>
+						<svg class="wwb-carrelage-desc__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><line x1="6" y1="17" x2="18" y2="17"/></svg>
+						<div><strong>Cuisine</strong><em>Sol et crédence</em></div>
+					</li>
+					<li>
+						<svg class="wwb-carrelage-desc__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/><path d="M4 18v2"/><path d="M20 18v2"/></svg>
+						<div><strong>Salon &amp; salle à manger</strong><em>Pièces à vivre</em></div>
+					</li>
+					<li>
+						<svg class="wwb-carrelage-desc__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 4h3a2 2 0 0 1 2 2v14"/><path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"/></svg>
+						<div><strong>Entrée &amp; couloir</strong><em>Zones de passage</em></div>
+					</li>
+					<li class="is-highlight">
+						<svg class="wwb-carrelage-desc__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+						<div><strong>Plancher chauffant compatible</strong><em>Basse température, sans contrainte</em></div>
+					</li>
 				</ul>
 			</aside>
 		</section>
